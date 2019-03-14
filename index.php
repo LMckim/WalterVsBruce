@@ -1,5 +1,7 @@
 <?php
-$page = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/index.html');
+include_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/pageBuild.php');
+$build = new pageBuild();
 
+$page = $build->buildPage();
 print($page);
 ?>

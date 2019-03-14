@@ -1,4 +1,4 @@
-#header-bar {
+#nav-bar {
   background-color: green;
   color: white;
   position: absolute;
@@ -8,18 +8,18 @@
   padding-top: 20px;
 }
 
-#header-bar #header-icon {
+#nav-bar #nav-icon {
   fill: white;
   width: 40px;
   float: left;
   padding: 10px;
 }
 
-#header-bar h3 {
+#nav-bar h3 {
   font-family: 'Fredericka the Great', cursive;
 }
 
-#header-bar h3 span {
+#nav-bar h3 span {
   color: rgba(255, 0, 0, 0.671);
 }
 /*# sourceMappingURL=styles.css.map */
