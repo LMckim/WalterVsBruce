@@ -2,12 +2,12 @@
 
 class pageBuild{
 
-    public function buildPage($cards)
+    public function buildPage($mageDir)
     {
         $page ='';
         $page .= $this->addHeader();
         $page .= $this->addNav();
-        $page .= $this->generateCards($cards);
+        $page .= $this->generateCards($imageDir);
         $page .= $this->addFooter();
         return $page;
     }
@@ -22,12 +22,9 @@ class pageBuild{
         $nav = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/nav-bar.html');
         return $nav;
     }
-    private  function generateCards($cards)
+    private  function generateCards($imageDir)
     {
-        foreach($cards as $card)
-        {
-            
-        }
+    
         return $content;
 
     }
