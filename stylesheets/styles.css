@@ -4,6 +4,7 @@
   position: absolute;
   top: -20px;
   left: 0;
+  text-align: left;
   width: 100%;
   padding-top: 20px;
 }
@@ -21,5 +22,44 @@
 
 #nav-bar h3 span {
   color: rgba(255, 0, 0, 0.671);
+}
+
+#content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  padding-top: 60px;
+  font-family: 'Fredericka the Great', cursive;
+  text-align: center;
+}
+
+#content .image-card {
+  padding: 10px 10px;
+  margin: 5px 5px;
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+
+#content .image-card h2 {
+  font-size: 16pt;
+}
+
+#content .image-card .card-image {
+  border-style: none;
+  border-radius: 10px;
+}
+
+#content .image-card .card-options {
+  padding-top: 10px;
+  border-top: 2px solid gray;
+  width: 100%;
+}
+
+#content .image-card .card-options button {
+  border: 1px solid 0;
 }
 /*# sourceMappingURL=styles.css.map */

@@ -6,6 +6,8 @@
     top: -20px;
     left: 0;
 
+    text-align: left;
+
     width: 100%;
     padding-top: 20px;
 
@@ -26,4 +28,36 @@
     }
 
 
+}
+#content{
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: 60px;
+
+    font-family: 'Fredericka the Great', cursive;
+    text-align: center;
+
+    .image-card{
+        padding: 10px 10px;
+        margin: 5px 5px;
+        border: 2px solid gray;
+        border-radius: 10px;
+
+        h2{
+            font-size: 16pt;
+        } 
+        .card-image{
+            border-style: none;
+            border-radius: 10px;
+        }
+        .card-options{
+            padding-top: 10px;
+            border-top: 2px solid gray;
+            width: 100%;
+
+            button{
+                border: 1px solid green($color: #000000);
+            }
+        }
+    }
 }
