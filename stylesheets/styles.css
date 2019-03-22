@@ -18,10 +18,17 @@
 
 #nav-bar h3 {
   font-family: 'Fredericka the Great', cursive;
+  position: absolute;
+  padding-left: 70px;
 }
 
 #nav-bar h3 span {
   color: rgba(255, 0, 0, 0.671);
+}
+
+#nav-bar .admin-btn {
+  margin-top: 15px;
+  float: right;
 }
 
 #content {
@@ -32,6 +39,9 @@
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding-top: 60px;
   font-family: 'Fredericka the Great', cursive;
   text-align: center;
@@ -42,6 +52,8 @@
   margin: 5px 5px;
   border: 2px solid gray;
   border-radius: 10px;
+  -webkit-box-shadow: 1px 3px 2px gray, -1px 0px 2px gray;
+          box-shadow: 1px 3px 2px gray, -1px 0px 2px gray;
 }
 
 #content .image-card h2 {

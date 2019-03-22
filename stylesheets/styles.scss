@@ -22,16 +22,22 @@
     h3{
         font-family: 'Fredericka the Great', cursive;
 
+        position: absolute;
+        padding-left: 70px;
+
         span{
             color: rgba(255, 0, 0, 0.671);
         }
     }
-
-
+    .admin-btn{
+        margin-top: 15px;
+        float: right;
+    }
 }
 #content{
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     padding-top: 60px;
 
     font-family: 'Fredericka the Great', cursive;
@@ -42,6 +48,8 @@
         margin: 5px 5px;
         border: 2px solid gray;
         border-radius: 10px;
+
+        box-shadow: 1px 3px 2px gray, -1px 0px 2px gray;
 
         h2{
             font-size: 16pt;
