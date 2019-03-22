@@ -33,6 +33,17 @@
         margin-top: 15px;
         float: right;
     }
+    #admin-form{
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 80px;
+        background-color: green; 
+
+        border: 2px solid darkgreen;
+
+        text-align: center;
+    }
 }
 #content{
     display: flex;

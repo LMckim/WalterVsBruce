@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 14, 2019 at 03:55 AM
+-- Generation Time: Mar 22, 2019 at 03:38 PM
 -- Server version: 5.7.25-0ubuntu0.18.04.2
 -- PHP Version: 7.2.15-0ubuntu0.18.04.1
 
@@ -30,6 +30,19 @@ CREATE TABLE `images` (
   `timeUpload` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `u_id` int(11) NOT NULL,
+  `uName` varchar(128) NOT NULL,
+  `uPass` varchar(1024) NOT NULL,
+  `stay` enum('Y','N') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -41,6 +54,12 @@ ALTER TABLE `images`
   ADD PRIMARY KEY (`img_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`u_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -49,3 +68,8 @@ ALTER TABLE `images`
 --
 ALTER TABLE `images`
   MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT;

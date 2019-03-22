@@ -2,7 +2,7 @@
 
 class pageBuild{
 
-    public function buildPage($imageDir)
+    public function buildPage($imageDir,$loggedIn)
     {
         $card = 'card.html';
         $cardTemplate = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/'.$card);
@@ -10,7 +10,7 @@ class pageBuild{
         array_splice($imageDir,sizeof($imageDir)-1);
         $page ='';
         $page .= $this->addHeader();
-        $page .= $this->addNav();
+        $page .= $this->addNav($loggedIn);
         $page .= $this->generateCards($imageDir,$cardTemplate);
         $page .= $this->addFooter();
         return $page;
@@ -21,9 +21,16 @@ class pageBuild{
         $header = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/header.html');
         return $header;
     }
-    private function addNav()
+    private function addNav($loggedIn)
     {
         $nav = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/nav-bar.html');
+        if($loggedIn == 'yes')
+        {   
+            $form = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/admin-form-loggedIn.html');
+        }else{
+            $form = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/admin-form-default.html');
+        }
+        $this->insertString_atId($nav,$form,'admin-form');
         return $nav;
     }
     private function generateCards($imageDir,$cardTemplate)
@@ -49,11 +56,18 @@ class pageBuild{
         return $footer;
     }
 
+    // string insertion tools
     private function insertString_replaceKey(&$baseString,$stringToInsert,$insertionKey)
     {
         $offset = strlen($insertionKey);
         $insertionPoint = strpos($baseString,$insertionKey);
         $baseString = substr_replace($baseString,$stringToInsert,$insertionPoint,$offset);
+    }
+    private function insertString_atId(&$baseString,$stringToInsert,$ID)
+    {
+        $pos = strpos($baseString,$ID);
+        $insertionPoint = strpos($baseString,'>',$pos) + 1; // just to move past the '>'
+        $baseString = substr_replace($baseString,$stringToInsert,$insertionPoint,0);
     }
     private function insertImageSource_atClass(&$baseString,$imageSrc,$class)
     {
