@@ -2,7 +2,7 @@
 
 class pageBuild{
 
-    public function buildPage($imageDir,$loggedIn)
+    public function buildPage($imageDir,$attr)
     {
         $card = 'card.html';
         $cardTemplate = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/'.$card);
@@ -10,7 +10,7 @@ class pageBuild{
         array_splice($imageDir,sizeof($imageDir)-1);
         $page ='';
         $page .= $this->addHeader();
-        $page .= $this->addNav($loggedIn);
+        $page .= $this->addNav($attr);
         $page .= $this->generateCards($imageDir,$cardTemplate);
         $page .= $this->addFooter();
         return $page;
@@ -21,10 +21,10 @@ class pageBuild{
         $header = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/header.html');
         return $header;
     }
-    private function addNav($loggedIn)
+    private function addNav($attr)
     {
         $nav = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/nav-bar.html');
-        if($loggedIn == 'yes')
+        if(in_array('loggedIn',$attr))
         {   
             $form = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/admin-form-loggedIn.html');
         }else{
