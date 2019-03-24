@@ -9,7 +9,7 @@ class imageStore
         //shell_exec('php testTools/delete-images.php');
         //debugging
         $path;
-        $title = $title;
+        $title = $conn->real_escape_string($title);
         $date;
         $ratio;
         $orientation;
