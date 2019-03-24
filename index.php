@@ -16,7 +16,7 @@ $build = new pageBuild();
 
 $attr = array();
 if(isset($_SESSION['u_id'])){ $attr = array('loggedIn'); }
-$page = $build->buildPage($imageDir,$attr);
+$page = $build->buildPage($imageDir,$attr,$conn);
 print($page);
 
 // send any json message to server after page sent

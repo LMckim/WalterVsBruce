@@ -2,7 +2,7 @@
 
 class pageBuild{
 
-    public function buildPage($imageDir,$attr)
+    public function buildPage($imageDir,$attr,$conn)
     {
         $card = 'card.html';
         $cardTemplate = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/'.$card);
@@ -10,7 +10,7 @@ class pageBuild{
         $page ='';
         $page .= $this->addHeader();
         $page .= $this->addNav($attr);
-        $page .= $this->generateCards($imageDir,$cardTemplate);
+        $page .= $this->generateCards($imageDir,$cardTemplate,$conn);
         $page .= $this->addFooter();
         return $page;
     }
@@ -32,17 +32,41 @@ class pageBuild{
         $this->insertString_atId($nav,$form,'admin-form');
         return $nav;
     }
-    private function generateCards($imageDir,$cardTemplate)
+    private function generateCards($imageDir,$cardTemplate,$conn)
     {   
         $content = '';
+
+        $sql = "SELECT `title`,`path`,`date` FROM `images` LIMIT 50";
+        $imageDB = $conn->query($sql);
+        if(mysqli_num_rows($imageDB) <= 0)
+        {
+            print("database query failure! exiting program...");
+            exit();
+        }
+        $rows = array();
+        while($row = $imageDB->fetch_array(MYSQLI_ASSOC))
+        {
+            $row['path'] = basename($row['path']);
+            $rows[] = $row;
+        }
+        //get list of images from directory
         $imageDir = array_reverse($imageDir);
-        foreach($imageDir as $image)
+        foreach($imageDir as $imageName)
         {
             $newCard = $cardTemplate;
-            $imageTitle = substr($image,0,strpos($image,"."));
+            foreach($rows as $row)
+            {
+                if(in_array($imageName,$row))
+                {
+                    $imageTitle = $row['title'];
+                    break;
+                }else{
+                    $imageTitle = 'Bruce_Trail';
+                }
+            }
             $this->insertString_replaceKey($newCard,$imageTitle,'{{title}}');
             $class = 'card-image';
-            $imagePath = '../../images/thumbs/' . $image;
+            $imagePath = '../../images/thumbs/' . $imageName;
             $this->insertImageSource_atClass($newCard,$imagePath,$class);
             $content .= $newCard;
 
