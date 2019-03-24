@@ -40,8 +40,7 @@ class pageBuild{
         $imageDB = $conn->query($sql);
         if(mysqli_num_rows($imageDB) <= 0)
         {
-            print("database query failure! exiting program...");
-            exit();
+            print("database query failure,either no entries or some other bigger issue");
         }
         $rows = array();
         while($row = $imageDB->fetch_array(MYSQLI_ASSOC))
@@ -59,6 +58,7 @@ class pageBuild{
                 if(in_array($imageName,$row))
                 {
                     $imageTitle = $row['title'];
+                    $date = $row['date'];
                     break;
                 }else{
                     $imageTitle = 'Bruce_Trail';
@@ -68,6 +68,7 @@ class pageBuild{
             $class = 'card-image';
             $imagePath = '../../images/thumbs/' . $imageName;
             $this->insertImageSource_atClass($newCard,$imagePath,$class);
+            $this->insertString_atClass($newCard,$date,'card-date');
             $content .= $newCard;
 
         }
@@ -90,6 +91,12 @@ class pageBuild{
     private function insertString_atId(&$baseString,$stringToInsert,$ID)
     {
         $pos = strpos($baseString,$ID);
+        $insertionPoint = strpos($baseString,'>',$pos) + 1; // just to move past the '>'
+        $baseString = substr_replace($baseString,$stringToInsert,$insertionPoint,0);
+    }
+    private function insertString_atClass(&$baseString,$stringToInsert,$class)
+    {
+        $pos = strpos($baseString,$class);
         $insertionPoint = strpos($baseString,'>',$pos) + 1; // just to move past the '>'
         $baseString = substr_replace($baseString,$stringToInsert,$insertionPoint,0);
     }
