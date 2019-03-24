@@ -1,5 +1,5 @@
 #nav-bar {
-  background-color: green;
+  background-color: #28a528;
   color: white;
   position: absolute;
   top: -20px;
@@ -7,6 +7,8 @@
   text-align: left;
   width: 100%;
   padding-top: 20px;
+  -webkit-box-shadow: 0px 2px #218b21;
+          box-shadow: 0px 2px #218b21;
 }
 
 #nav-bar #nav-icon {
@@ -23,7 +25,7 @@
 }
 
 #nav-bar h3 span {
-  color: rgba(255, 0, 0, 0.671);
+  color: rgba(235, 0, 0, 0.671);
 }
 
 #nav-bar .admin-btn {

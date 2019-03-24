@@ -20,6 +20,6 @@ $page = $build->buildPage($imageDir,$attr);
 print($page);
 
 // send any json message to server after page sent
-if(isset($jsonReturn)){ print(json_encode($jsonReturn)); }
+//if(isset($jsonReturn)){ print(json_encode($jsonReturn)); }
 die();
 ?>

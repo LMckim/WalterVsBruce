@@ -35,6 +35,7 @@ class pageBuild{
     private function generateCards($imageDir,$cardTemplate)
     {   
         $content = '';
+        $imageDir = array_reverse($imageDir);
         foreach($imageDir as $image)
         {
             $newCard = $cardTemplate;

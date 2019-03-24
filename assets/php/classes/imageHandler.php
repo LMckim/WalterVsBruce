@@ -9,11 +9,15 @@ class imageStore
         {
             return 'image already exists';
         } 
-        $path = 'hello';
+        // 6 & 8 = portrait
+        // 1 & 3 = landscape
+        $orientation = $this->checkOrientation($img);
+        $path = '';
         if($this->storeImage($img,$dir,$path) == FALSE)
         {
             return 'could not store image';
         }
+        //$this->fixOrientation($path,$orientation);
         if($this->createThumb($img['name'],$dir,$path) == FALSE)
         {
             return "could not convert image";
@@ -29,6 +33,30 @@ class imageStore
             return FALSE;
         }
         return TRUE;
+    }
+    private function checkOrientation($img)
+    {
+        $meta = exif_read_data($img['tmp_name']);
+        return $meta['Orientation'];
+    }
+    private function fixOrientation(&$img,$orientation)
+    {
+        if($orientation == 6)
+        {
+            $src = imagecreatefromjpeg($img);
+            $rot = imagerotate($src,90,0);
+            imagejpeg($rot);
+            imagedestroy($src);
+            imagedestroy($rot);
+        }
+        if($orientation == 8)
+        {
+            $src = imagecreatefromjpeg($img);
+            $rot = imagerotate($src,-90,0);
+            imagejpeg($rot);
+            imagedestroy($src);
+            imagedestroy($rot);
+        }
     }
     private function storeImage($img,$dir,&$path)
     {
