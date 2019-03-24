@@ -6,8 +6,7 @@ class pageBuild{
     {
         $card = 'card.html';
         $cardTemplate = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/'.$card);
-        $imageDir = array_diff(scandir($imageDir),array('..','.'));
-        array_splice($imageDir,sizeof($imageDir)-1);
+        $imageDir = parseDirectory_forFiles($imageDir);
         $page ='';
         $page .= $this->addHeader();
         $page .= $this->addNav($attr);

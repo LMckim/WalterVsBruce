@@ -1,45 +1,127 @@
 <?php
 // classes for handling image verification as well as placement into the database
 // and re-building indexing of images as well as image sizes
-class imageIndex
+class imageStore
 {
-    function __construct($imagePath)
+    function handleImage($img,$dir)
     {
-
-        return $status;
+        if($this->checkDuplicate($img['name'],$dir) == FALSE)
+        {
+            return 'image already exists';
+        } 
+        $path = 'hello';
+        if($this->storeImage($img,$dir,$path) == FALSE)
+        {
+            return 'could not store image';
+        }
+        if($this->createThumb($img['name'],$dir,$path) == FALSE)
+        {
+            return "could not convert image";
+        }
+        return TRUE;
+        
     }
-    private function checkDuplicate($img)
+    private function checkDuplicate($name,$dir)
     {
-
+        $files = parseDirectory_forFiles($dir);
+        if(in_array($name,$files))
+        {
+            return FALSE;
+        }
+        return TRUE;
     }
-    private function createThumb($img)
+    private function storeImage($img,$dir,&$path)
     {
+        $path = $dir .'/'. $img['name'];
+        if(move_uploaded_file($img['tmp_name'],$path))
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+    private function createThumb($name,$dir,$orignalImagePath)
+    {   
+        // thumbnail dimensions
+        $w = 300;
+        $h = 200;
+        if($this->resizeImage($name,$dir,$orignalImagePath,$w,$h))
+        {
+            return TRUE;
+        }
+        return FALSE;
 
     }
-    private function setLocation($img)
+
+    private function resizeImage($name,$dir,$path,$w,$h)
     {
+        $thumbDir = $dir .'/../thumbs';
+
+        $image = imagecreatefromjpeg($path);
+        $imageW = imagesx($image);
+        $imageH = imagesy($image);
+
+        $thumb = imagecreatetruecolor($w,$h);
+
+        imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, 
+                            $h, $imageW, $imageH);
+
+        if(!imagejpeg($thumb,$thumbDir.'/'.$name,80))
+        {
+            return FALSE;
+        }
+        return TRUE;
 
     }
-    private function setRotation($img)
-    {
-
-    }
-    
 }
 class imageVerify
 {
-    function __construct($imageTmpPath)
+    public function verify($img)
     {
+        if($this->verifyIsImage($img) == FALSE)
+        {
+            return "this file is not an image";
+        }
+        if($this->verifySize($img) == FALSE)
+        {
+            return "image is too large";
+        }
+        if($this->verifyType($img) == FALSE)
+        {
+            return "image is not of the proper type";
+        }
+        return TRUE;
+    }
+    private function verifyIsImage($img)
+    {
+        $size = getimagesize($img['tmp_name']);
 
-        return $status;
+        //checks that the images dimensions are returned as well as image type
+        if((gettype($size[0]) == 'integer') && 
+           (gettype($size[1]) == 'integer') &&
+           (array_key_exists('mime',$size)))
+        {
+            return TRUE;
+        }
+        return FALSE;
     }
     private function verifySize($img)
     {
-        return $status;
+        if($img['size'] > 20000000)
+        {
+            return FALSE;
+        }
+        return TRUE;
+
     }
     private function verifyType($img)
     {
-        return $status;
+        $imgType = strtolower(pathinfo($img['name'],PATHINFO_EXTENSION));
+        if($imgType == 'jpg' || $imgType == 'png' || 
+            $imgType == 'jpeg' || $imgType == 'gif')
+        {
+            return TRUE;
+        }
+        return FALSE;
     }
 
 }
