@@ -4,6 +4,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/pageBuild.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/helpers/directoryTools.php');
 
 $jsonReturn = array('status'=>'success','message'=>'all is well');
+// get requests handling
+if(isset($_GET))
+{
+    if($_GET['getComments'])
+    {
+        include_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/GETrequests/getComments.php');
+    }
+}
+
+// post requests handling
 if(isset($_POST['login']))
 {
     include_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/userActions/login.php');

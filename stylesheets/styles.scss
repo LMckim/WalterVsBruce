@@ -1,5 +1,9 @@
+$site-green : rgb(71, 116, 71);
+$site-shadow : rgb(70, 82, 70);
+$mainFont : 'Montserrat', sans-serif;
+
 #nav-bar{
-    background-color: rgb(40, 165, 40);
+    background-color: $site-green;
     color: white;
 
     position: absolute;
@@ -11,7 +15,7 @@
     width: 100%;
     padding-top: 20px;
 
-    box-shadow: 0px 2px rgb(33, 139, 33);
+    box-shadow: 0px 5px 5px $site-shadow;
 
     #nav-icon{
         fill: white;
@@ -22,13 +26,13 @@
         padding: 10px;
     }
     h3{
-        font-family: 'Fredericka the Great', cursive;
+        font-family: $mainFont;
 
         position: absolute;
         padding-left: 70px;
 
         span{
-            color: rgba(235, 0, 0, 0.671);
+            color: rgba(255, 255, 255, 0.671);
         }
     }
     .admin-btn{
@@ -41,9 +45,9 @@
         position: absolute;
         right: 0;
         top: 80px;
-        background-color: green; 
+        background-color: $site-green; 
 
-        border: 2px solid darkgreen;
+        border: 2px solid $site-shadow;
 
         text-align: center;
     }
@@ -54,7 +58,7 @@
     justify-content: center;
     padding-top: 60px;
 
-    font-family: 'Fredericka the Great', cursive;
+    font-family: $mainFont;
     text-align: center;
 
     .image-card{

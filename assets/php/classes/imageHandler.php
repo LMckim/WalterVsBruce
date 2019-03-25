@@ -66,7 +66,7 @@ class imageStore
     private function getDate($meta)
     {
         $date = new DateTime($meta['DateTime']);
-        return $date->format('l,F d \a\t h:i a');
+        return $date->format('l,\sp F d \a\t h:i a');
     }
     private function getRatio($meta)
     {
@@ -154,7 +154,8 @@ class imageStore
         $image = imagecreatefromjpeg($path);
         $imageW = imagesx($image);
         $imageH = imagesy($image);
-
+        
+        // fix to work for width instead of height
         $thumb = imagecreatetruecolor($w,$h);
         $dst_w = $w / 2 * $ratio;
         $wD = $w/2;
