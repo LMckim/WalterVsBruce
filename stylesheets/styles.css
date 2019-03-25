@@ -1,50 +1,80 @@
-#nav-bar {
-  background-color: #477447;
-  color: white;
-  position: absolute;
-  top: -20px;
-  left: 0;
-  text-align: left;
-  width: 100%;
-  padding-top: 20px;
-  -webkit-box-shadow: 0px 5px 5px #465246;
-          box-shadow: 0px 5px 5px #465246;
+body {
+  font-family: "Montserrat", sans-serif;
 }
 
-#nav-bar #nav-icon {
-  fill: white;
-  width: 40px;
-  float: left;
-  padding: 10px;
+body .underline {
+  border-bottom: 5px solid #6B7E6C;
+}
+
+#nav-bar {
+  background-color: #6B7E6C;
+  color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: left;
+  letter-spacing: 0.16rem;
+  line-height: 2;
+  font-size: 0.7rem;
 }
 
 #nav-bar h3 {
-  font-family: "Montserrat", sans-serif;
-  position: absolute;
-  padding-left: 70px;
+  padding-left: 50px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
-#nav-bar h3 span {
-  color: rgba(255, 255, 255, 0.671);
+#nav-bar h3:hover {
+  cursor: pointer;
 }
 
-#nav-bar .admin-btn {
-  margin-top: 15px;
-  margin-right: 15px;
-  float: right;
-}
-
-#nav-bar #admin-form {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 80px;
-  background-color: #477447;
-  border: 2px solid #465246;
+#nav-bar .nav-banner {
   text-align: center;
 }
 
+#nav-bar .nav-banner h1 {
+  color: #FFFFFF;
+  position: absolute;
+  top: 180px;
+  width: 100%;
+  opacity: 1 !important;
+}
+
+#nav-bar .nav-banner .nav-image {
+  background-image: url("../site_images/banner-img.jpg");
+  background-size: 100%;
+  background-position-y: bottom;
+  height: 400px;
+}
+
+#nav-bar .nav-banner .nav-image-overlay {
+  position: relative;
+  top: 0;
+  background-color: #000000;
+  height: 400px;
+  opacity: 0.5;
+}
+
+.content-header {
+  position: absolute;
+  width: 100%;
+  top: 475px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.16rem;
+  line-height: 2;
+}
+
+.content-header span {
+  padding-bottom: 10px;
+}
+
 #content {
+  position: absolute;
+  top: 480px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -56,35 +86,24 @@
       -ms-flex-pack: center;
           justify-content: center;
   padding-top: 60px;
-  font-family: "Montserrat", sans-serif;
   text-align: center;
 }
 
-#content .image-card {
-  padding: 10px 10px;
-  margin: 5px 5px;
-  border: 2px solid gray;
-  border-radius: 10px;
-  -webkit-box-shadow: 1px 3px 2px gray, -1px 0px 2px gray;
-          box-shadow: 1px 3px 2px gray, -1px 0px 2px gray;
-}
-
-#content .image-card h2 {
-  font-size: 16pt;
-}
-
-#content .image-card .card-image {
-  border-style: none;
-  border-radius: 10px;
-}
-
-#content .image-card .card-options {
-  padding-top: 10px;
-  border-top: 2px solid gray;
-  width: 100%;
-}
-
-#content .image-card .card-options button {
-  border: 1px solid 0;
+@media screen and (max-width: 600px) {
+  #nav-bar .nav-banner h1 {
+    top: 90px;
+  }
+  #nav-bar .nav-banner .nav-image {
+    height: 200px;
+  }
+  #nav-bar .nav-banner .nav-image-overlay {
+    height: 200px;
+  }
+  .content-header {
+    top: 250px;
+  }
+  #content {
+    top: 280px;
+  }
 }
 /*# sourceMappingURL=styles.css.map */

@@ -1,89 +1,130 @@
-$site-green : rgb(71, 116, 71);
-$site-shadow : rgb(70, 82, 70);
+$site-green : #6B7E6C;
+$site-faded-green : #7E847F ;
+$site-maroon : #613B40;
+$site-dark : #000000;
+$site-gray : #BEBEBE;
+$site-white : #FFFFFF;
+
 $mainFont : 'Montserrat', sans-serif;
+$letter-spacing : 0.16rem;
+$letter-height : 2; 
+
+$screen-mid: 600px;
+$screen-small: 350px;
+
+$image-height :400px;
+$image-half-height: 200px;
+
+
+body{
+    font-family: $mainFont;
+
+    .underline{
+        border-bottom: 5px solid $site-green;
+    }
+}
+
 
 #nav-bar{
     background-color: $site-green;
-    color: white;
+    color: $site-white;
 
     position: absolute;
-    top: -20px;
+    top: 0;
     left: 0;
 
-    text-align: left;
-
     width: 100%;
-    padding-top: 20px;
 
-    box-shadow: 0px 5px 5px $site-shadow;
+    text-align: left;
+    letter-spacing: $letter-spacing;
+    line-height: $letter-height;
+    font-size: 0.7rem;
 
-    #nav-icon{
-        fill: white;
-        width:40px;
-
-        float: left;
-
-        padding: 10px;
-    }
     h3{
-        font-family: $mainFont;
-
-        position: absolute;
-        padding-left: 70px;
-
-        span{
-            color: rgba(255, 255, 255, 0.671);
-        }
+        padding-left: 50px;
+        width: max-content;
     }
-    .admin-btn{
-        margin-top: 15px;
-        margin-right: 15px;
-        float: right;
+    h3:hover{
+        cursor: pointer;
     }
-    #admin-form{
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 80px;
-        background-color: $site-green; 
 
-        border: 2px solid $site-shadow;
+    .nav-banner{
 
         text-align: center;
+        h1{
+            color: $site-white;
+            position: absolute;
+            top: 180px;
+            width: 100%;
+            opacity: 1 !important;
+        }
+        .nav-image{ 
+
+            background-image: url('../site_images/banner-img.jpg');
+            background-size: 100%;
+            background-position-y: bottom;
+            
+            height: $image-height;
+
+
+        }
+        .nav-image-overlay{
+            position: relative;
+            top : 0;
+            background-color: #000000;
+            height: $image-height;
+            opacity: 0.5;
+
+        }
+    }
+
+}
+.content-header{
+    position: absolute;
+    width: 100%;
+    top: $image-height + 75;
+    text-align: center;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: $letter-spacing;
+    line-height: $letter-height;
+
+    span{
+        padding-bottom: 10px;
     }
 }
 #content{
+    position: absolute;
+    top: $image-height + 80;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     padding-top: 60px;
 
-    font-family: $mainFont;
     text-align: center;
 
-    .image-card{
-        padding: 10px 10px;
-        margin: 5px 5px;
-        border: 2px solid gray;
-        border-radius: 10px;
+}
 
-        box-shadow: 1px 3px 2px gray, -1px 0px 2px gray;
+@media screen and (max-width: 600px){
 
-        h2{
-            font-size: 16pt;
-        } 
-        .card-image{
-            border-style: none;
-            border-radius: 10px;
-        }
-        .card-options{
-            padding-top: 10px;
-            border-top: 2px solid gray;
-            width: 100%;
-
-            button{
-                border: 1px solid green($color: #000000);
+    #nav-bar{
+        .nav-banner{
+            h1{
+                top: 90px;
+            }
+            .nav-image{
+                height:$image-half-height;
+            }
+            .nav-image-overlay{
+                height:$image-half-height;
             }
         }
+    }
+    .content-header{
+        top: $image-half-height + 50;
+    }
+    #content{
+        top: $image-half-height + 80
     }
 }

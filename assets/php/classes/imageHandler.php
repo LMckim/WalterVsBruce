@@ -66,7 +66,7 @@ class imageStore
     private function getDate($meta)
     {
         $date = new DateTime($meta['DateTime']);
-        return $date->format('l,\sp F d \a\t h:i a');
+        return $date->format('d:j:o | g:i:s A');
     }
     private function getRatio($meta)
     {
@@ -138,7 +138,7 @@ class imageStore
     {   
         // thumbnail dimensions
         $w = 300;
-        $h = 200;
+        $h = 300;
         if($this->resizeImage($name,$dir,$imagePath,$w,$h,$ratio,$orientation))
         {
             return TRUE;
