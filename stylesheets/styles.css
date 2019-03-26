@@ -30,6 +30,10 @@ body .underline {
   cursor: pointer;
 }
 
+#nav-bar .login-form {
+  display: none;
+}
+
 #nav-bar .nav-banner {
   text-align: center;
 }
@@ -87,6 +91,101 @@ body .underline {
           justify-content: center;
   padding-top: 60px;
   text-align: center;
+}
+
+#content .image-card {
+  background-color: #BEBEBE;
+  margin: 15px;
+  padding: 10px 10px 0px 10px;
+}
+
+#content .image-card .image-container {
+  position: relative;
+}
+
+#content .image-card .card-date {
+  font-weight: 1000;
+}
+
+#content .image-card .card-title {
+  z-index: 2;
+  color: #FFFFFF;
+  position: absolute;
+  top: 75px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+
+#content .image-card .image-card-overlay {
+  z-index: 1;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  background-color: #000000;
+}
+
+#content .image-card:hover .card-title {
+  opacity: 1;
+}
+
+#content .image-card:hover .image-card-overlay {
+  opacity: 0.7;
+}
+
+#admin-overlay {
+  display: none;
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.5;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  background-color: #000000;
+}
+
+#admin-form {
+  z-index: 4;
+  display: none;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#admin-form #login-form {
+  z-index: 4;
+  background-color: #6B7E6C;
+  opacity: 1 !important;
+  text-align: center;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  -webkit-transition-delay: 0.2s;
+          transition-delay: 0.2s;
+  margin-top: 52px;
+  padding: 20px 10px 0px 10px;
+  height: 25%;
 }
 
 @media screen and (max-width: 600px) {

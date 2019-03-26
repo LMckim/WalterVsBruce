@@ -4,20 +4,22 @@ window.onload = function(){
 
     // handles showing and hiding of login form
     var adminBtn = document.getElementsByClassName('admin-btn')[0];
-    adminBtn.addEventListener('click',function(){
-        let adminForm = document.getElementById('admin-form');
-
-        if(adminForm.style.getPropertyValue('display') == 'block'){
-            adminForm.style.setProperty('display','none');
-        }else{
-            adminForm.style.setProperty('display','block');
+    adminBtn.addEventListener('click',function(element){
+        
+        let overlay = document.getElementById('admin-overlay');
+        let form = document.getElementById('admin-form');
+        let display = overlay.style.getPropertyValue('display');
+        if(display == '' || display == 'none')
+        {
+            overlay.style.setProperty('display','block');
+            form.style.setProperty('display','flex');
         }
     });
 
     // query DB for all comments related to each image
-    var commentBtn = document.getElementsByClassName('comment-btn');
+    var imageBtn = document.getElementsByClassName('comment-btn');
     var imageTitles = [];
-    for(var i=0; i< commentBtn.length; i++)
+    for(var i=0; i< imageBtn.length; i++)
     {
         var par = commentBtn[i].parentElement.parentElement;
         var titleDiv = par.childNodes[1];
@@ -38,6 +40,6 @@ function request(type,url)
     http.open(type,url);
     http.send();
     http.onreadystatechange=(e)=>{
-        console.log(http.responseText);
+        //console.log(http.responseText);
     }
 }

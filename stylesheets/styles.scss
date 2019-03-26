@@ -48,6 +48,10 @@ body{
         cursor: pointer;
     }
 
+    .login-form{
+        display: none;
+    }
+
     .nav-banner{
 
         text-align: center;
@@ -104,12 +108,91 @@ body{
 
     text-align: center;
 
+    .image-card{
+        background-color: $site-gray;
+        margin: 15px;
+        padding: 10px 10px 0px 10px;
+
+        .image-container{
+            position: relative;
+        }
+
+        .card-date{
+            font-weight: 1000;
+        }
+        .card-title{
+            z-index: 2;
+            color: $site-white;
+            position: absolute;
+            top:75px; left: 0; bottom: 0; right: 0;
+            text-align: center;
+            opacity: 0;
+            transition: .5s ease;
+
+        }
+        .image-card-overlay{
+            z-index: 1;
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+            transition: 0.5s ease;
+
+            background-color: $site-dark;
+
+        }
+    }
+    .image-card:hover{
+        .card-title{
+            opacity: 1;
+        }
+        .image-card-overlay{
+            opacity: 0.7;
+        }
+    }
+
 }
+#admin-overlay{
+    display: none;
+    z-index: 3;
+    position: fixed;
+    top: 0; bottom: 0; left: 0; right: 0;
+    opacity: 0.5;
+    justify-content: center;
+    transition: 0.5s ease; 
+    background-color: $site-dark;
+}
+#admin-form{
+    z-index: 4;
+    display: none;
+    flex-flow: row;
+    justify-content: center;
+    position: fixed;
+
+    top: 0; bottom: 0; left: 0; right: 0;
+
+    #login-form{
+        z-index: 4;
+        background-color: $site-green;
+        opacity: 1 !important;
+        text-align: center;
+        
+        transition: 0.5s ease;
+        transition-delay: 0.2s;
+
+        margin-top: 52px;
+
+        padding: 20px 10px 0px 10px;
+
+        height: 25%;
+    }
+}
+
 
 @media screen and (max-width: 600px){
 
     #nav-bar{
-        .nav-banner{
+        .nav-banner{ 
             h1{
                 top: 90px;
             }
