@@ -29,13 +29,20 @@ foreach($dir as $key => $image)
     $meta = exif_read_data($path);
     $copy = copy($path,$root.'/images/upload/'.$image);
 
-    $date = new DateTime($meta['DateTime']);
-    $date = $date->format('d.m.o | g:i A');
+    if(array_key_exists('DateTime',$meta))
+    {   
+        $date = new DateTime($meta['DateTime']);
+        $date = $date->format('d.m.o | g:i A');
+    }else{
+        $date = new DateTime($meta['FileDateTime']);
+        $date = $date->format('d.m.o | g:i A');
+    }
 
     $ratio = getRatio($meta);
     $orientation = $meta['Orientation'];
     fixOrientation($path,$orientation);
     $latLong = getLatLong($meta);
+    $w = 300; $h = 300;
     createThumb($image,$root.'/images/thumbs',$path,$w,$h,$ratio,$orientation);
 
     $sql = "INSERT INTO `images` (`title`,`path`,`latitude`,`longitude`,`date`)".
