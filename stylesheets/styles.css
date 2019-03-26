@@ -14,12 +14,13 @@ body .underline {
   left: 0;
   width: 100%;
   text-align: left;
-  letter-spacing: 0.16rem;
+  letter-spacing: 0.3rem;
   line-height: 2;
   font-size: 0.7rem;
 }
 
 #nav-bar h3 {
+  letter-spacing: 0.15rem;
   padding-left: 50px;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -44,6 +45,7 @@ body .underline {
   top: 180px;
   width: 100%;
   opacity: 1 !important;
+  font-size: 3.2em;
 }
 
 #nav-bar .nav-banner .nav-image {
@@ -66,9 +68,9 @@ body .underline {
   width: 100%;
   top: 475px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.16rem;
+  letter-spacing: 0.3rem;
   line-height: 2;
 }
 
@@ -105,6 +107,7 @@ body .underline {
 
 #content .image-card .card-date {
   font-weight: 1000;
+  letter-spacing: 0.3rem;
 }
 
 #content .image-card .card-title {
@@ -119,6 +122,7 @@ body .underline {
   opacity: 0;
   -webkit-transition: .5s ease;
   transition: .5s ease;
+  letter-spacing: 0.3rem;
 }
 
 #content .image-card .image-card-overlay {
@@ -186,11 +190,27 @@ body .underline {
   margin-top: 52px;
   padding: 20px 10px 0px 10px;
   height: 25%;
+  color: #FFFFFF;
+}
+
+#admin-form #admin-options {
+  z-index: 4;
+  background-color: #6B7E6C;
+  opacity: 1 !important;
+  text-align: center;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  -webkit-transition-delay: 0.2s;
+          transition-delay: 0.2s;
+  margin-top: 52px;
+  padding: 20px 10px 0px 10px;
+  height: 25%;
+  color: #FFFFFF;
 }
 
 @media screen and (max-width: 600px) {
   #nav-bar .nav-banner h1 {
-    top: 90px;
+    top: 50px;
   }
   #nav-bar .nav-banner .nav-image {
     height: 200px;
@@ -199,7 +219,7 @@ body .underline {
     height: 200px;
   }
   .content-header {
-    top: 250px;
+    top: 270px;
   }
   #content {
     top: 280px;

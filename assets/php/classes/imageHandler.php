@@ -66,7 +66,7 @@ class imageStore
     private function getDate($meta)
     {
         $date = new DateTime($meta['DateTime']);
-        return $date->format('d:j:o | g:i:s A');
+        return $date->format('d.m.o | g:i A');
     }
     private function getRatio($meta)
     {

@@ -1,4 +1,5 @@
 <?php
+$timeStart = time();
 include_once($_SERVER['DOCUMENT_ROOT'].'../config.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'../assets/php/classes/imageHandler.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'../assets/php/helpers/directoryTools.php');
@@ -12,20 +13,24 @@ foreach($dir as $file)
     }
 }
 array_values($dir);
+shuffle($dir);
 
 $names = file('imageNames.txt');
+shuffle($names);
 $imageDir = $root. '/images/upload';
 
 $storeImg = new imageStore();
+$count = 0;
 foreach($dir as $key => $image)
 {
+    $count++;
     $title = $names[$key];
     $path = $root.'/images/testImages/'.$image;
     $meta = exif_read_data($path);
     $copy = copy($path,$root.'/images/upload/'.$image);
 
     $date = new DateTime($meta['DateTime']);
-    $date = $date->format('d:j:o | g:i:s A');
+    $date = $date->format('d.m.o | g:i A');
 
     $ratio = getRatio($meta);
     $orientation = $meta['Orientation'];
@@ -48,6 +53,10 @@ foreach($dir as $key => $image)
         }
     }
 }
+$timeEnd = time();
+$totalTime = $timeEnd - $timeStart;
+print('operation complete, '.$count.' images added'."\n".
+        'runtime of '.$totalTime.' seconds'."\n");
 function getRatio($meta)
 {
     $height = $meta['COMPUTED']['Height'];

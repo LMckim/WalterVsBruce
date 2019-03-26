@@ -25,8 +25,10 @@ class pageBuild{
         $nav = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/nav-bar.html');
         if(in_array('loggedIn',$attr))
         {   
+            $this->insertString_replaceKey($nav,'ADMIN OPTIONS','{{admin button}}');
             $form = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/admin-form-loggedIn.html');
         }else{
+            $this->insertString_replaceKey($nav,'WALT SIGN IN','{{admin button}}');
             $form = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/pages/elements/admin-form-default.html');
         }
         $this->insertString_atId($nav,$form,'admin-form');
@@ -57,7 +59,7 @@ class pageBuild{
             {
                 if(in_array($imageName,$row))
                 {
-                    $imageTitle = $row['title'];
+                    $imageTitle = strtoupper($row['title']);
                     $date = $row['date'];
                     break;
                 }else{

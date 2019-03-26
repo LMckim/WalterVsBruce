@@ -6,7 +6,7 @@ $site-gray : #BEBEBE;
 $site-white : #FFFFFF;
 
 $mainFont : 'Montserrat', sans-serif;
-$letter-spacing : 0.16rem;
+$letter-spacing : 0.3rem;
 $letter-height : 2; 
 
 $screen-mid: 600px;
@@ -41,6 +41,7 @@ body{
     font-size: 0.7rem;
 
     h3{
+        letter-spacing: 0.15rem;
         padding-left: 50px;
         width: max-content;
     }
@@ -61,6 +62,8 @@ body{
             top: 180px;
             width: 100%;
             opacity: 1 !important;
+
+            font-size: 3.2em;
         }
         .nav-image{ 
 
@@ -89,7 +92,7 @@ body{
     top: $image-height + 75;
     text-align: center;
 
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: $letter-spacing;
     line-height: $letter-height;
@@ -119,6 +122,7 @@ body{
 
         .card-date{
             font-weight: 1000;
+            letter-spacing: $letter-spacing;
         }
         .card-title{
             z-index: 2;
@@ -128,6 +132,7 @@ body{
             text-align: center;
             opacity: 0;
             transition: .5s ease;
+            letter-spacing: $letter-spacing;
 
         }
         .image-card-overlay{
@@ -185,6 +190,25 @@ body{
         padding: 20px 10px 0px 10px;
 
         height: 25%;
+
+        color: $site-white;
+    }
+    #admin-options{
+        z-index: 4;
+        background-color: $site-green;
+        opacity: 1 !important;
+        text-align: center;
+        
+        transition: 0.5s ease;
+        transition-delay: 0.2s;
+
+        margin-top: 52px;
+
+        padding: 20px 10px 0px 10px;
+
+        height: 25%;
+
+        color: $site-white;
     }
 }
 
@@ -194,7 +218,7 @@ body{
     #nav-bar{
         .nav-banner{ 
             h1{
-                top: 90px;
+                top: 50px;
             }
             .nav-image{
                 height:$image-half-height;
@@ -205,7 +229,7 @@ body{
         }
     }
     .content-header{
-        top: $image-half-height + 50;
+        top: $image-half-height + 70;
     }
     #content{
         top: $image-half-height + 80

@@ -2,7 +2,7 @@ var url = '/index.php?';
 
 window.onload = function(){
 
-    // handles showing and hiding of login form
+    // handles showing and hiding of admin forms
     var adminBtn = document.getElementsByClassName('admin-btn')[0];
     adminBtn.addEventListener('click',function(element){
         
@@ -13,6 +13,18 @@ window.onload = function(){
         {
             overlay.style.setProperty('display','block');
             form.style.setProperty('display','flex');
+
+            // once visible if clicked outside of will close
+            form.addEventListener('click',function(){
+                
+                overlay.style.setProperty('display','none');
+                form.style.setProperty('display','none');
+            });
+            let login = document.getElementById('login-form');
+            login.addEventListener('click',function(e){
+                e.stopPropagation();
+            });
+            
         }
     });
 
@@ -34,8 +46,7 @@ window.onload = function(){
     request('GET',url);
     
 }
-function request(type,url)
-{
+function request(type,url){
     var http = new XMLHttpRequest();
     http.open(type,url);
     http.send();
