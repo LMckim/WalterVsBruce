@@ -1,0 +1,60 @@
+[27-Mar-2019 15:17:06 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:17:06 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:17:06 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:22:57 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:22:57 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:22:57 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:23:52 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:23:52 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:23:52 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:24:26 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:24:26 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:24:26 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:24:53 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:24:53 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:24:53 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:27:33 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:27:33 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:27:33 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:27:42 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:27:42 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:27:42 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:33:48 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:33:48 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:33:48 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:36:35 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:36:35 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:36:35 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5
+[27-Mar-2019 15:37:37 America/New_York] PHP Warning:  include_once(../assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:37:37 America/New_York] PHP Warning:  include_once(): Failed opening '../assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 4
+[27-Mar-2019 15:37:37 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function getFilePath() in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:5
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 5

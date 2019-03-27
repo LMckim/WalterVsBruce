@@ -29,4 +29,10 @@ function parseDirectory_forFolders($path)
     $dir = array_values($dir);
     return $dir;
 }
+function getFilePath($file)
+{
+    $path = dirname($file);
+
+    return $path;
+}
 ?>

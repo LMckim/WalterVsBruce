@@ -20,14 +20,21 @@ window.onload = function(){
                 overlay.style.setProperty('display','none');
                 form.style.setProperty('display','none');
             });
-            let login = document.getElementById('login-form');
-            login.addEventListener('click',function(e){
-                e.stopPropagation();
-            });
-            
+            let admin = document.getElementById('admin-options');
+            if(admin){
+                admin.addEventListener('click',function(e){
+                    e.stopPropagation();
+                });
+            }else{
+                let login = document.getElementById('login-form');
+                if(login){
+                    login.addEventListener('click',function(e){
+                        e.stopPropagation();
+                    });
+                }
+            }
         }
     });
-
     // query DB for all comments related to each image
     var imageBtn = document.getElementsByClassName('comment-btn');
     var imageTitles = [];
@@ -44,7 +51,6 @@ window.onload = function(){
     url += urlAppend;
 
     request('GET',url);
-    
 }
 function request(type,url){
     var http = new XMLHttpRequest();

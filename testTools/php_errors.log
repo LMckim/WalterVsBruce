@@ -14,3 +14,37 @@ Stack trace:
 [26-Mar-2019 04:46:04 America/New_York] PHP Notice:  Undefined index: Orientation in /d_drive/Development/repos/WalterHikesBruce/testTools/insert-pictures.php on line 36
 [26-Mar-2019 04:46:04 America/New_York] PHP Notice:  Undefined index: DateTime in /d_drive/Development/repos/WalterHikesBruce/testTools/insert-pictures.php on line 32
 [26-Mar-2019 04:46:04 America/New_York] PHP Notice:  Undefined index: Orientation in /d_drive/Development/repos/WalterHikesBruce/testTools/insert-pictures.php on line 36
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  include_once(/d_drive/Development/repos/WalterHikesBruce/testTools/assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 8
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  include_once(): Failed opening '/d_drive/Development/repos/WalterHikesBruce/testTools/assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 8
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  include_once(/d_drive/Development/repos/WalterHikesBruce/testTools/config.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 9
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  include_once(): Failed opening '/d_drive/Development/repos/WalterHikesBruce/testTools/config.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 9
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  scandir(/d_drive/Development/repos/WalterHikesBruce/testTools/images/thumbs): failed to open dir: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 5
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  scandir(): (errno 2): No such file or directory in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 5
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 6
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  array_values() expects parameter 1 to be array, boolean given in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 14
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  scandir(/d_drive/Development/repos/WalterHikesBruce/testTools/images/upload): failed to open dir: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 5
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  scandir(): (errno 2): No such file or directory in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 5
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 6
+[27-Mar-2019 14:38:00 America/New_York] PHP Warning:  array_values() expects parameter 1 to be array, boolean given in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 14
+[27-Mar-2019 14:38:00 America/New_York] PHP Notice:  Undefined variable: conn in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 24
+[27-Mar-2019 14:38:00 America/New_York] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:24
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 24
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  include_once(/d_drive/Development/repos/WalterHikesBruce/testTools/assets/php/helpers/directoryTools.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 8
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  include_once(): Failed opening '/d_drive/Development/repos/WalterHikesBruce/testTools/assets/php/helpers/directoryTools.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 8
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  include_once(/d_drive/Development/repos/WalterHikesBruce/testTools/config.php): failed to open stream: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 9
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  include_once(): Failed opening '/d_drive/Development/repos/WalterHikesBruce/testTools/config.php' for inclusion (include_path='.:/usr/share/php') in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 9
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  scandir(/d_drive/Development/repos/WalterHikesBruce/testTools/images/thumbs): failed to open dir: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 5
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  scandir(): (errno 2): No such file or directory in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 5
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 6
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  array_values() expects parameter 1 to be array, boolean given in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 14
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  scandir(/d_drive/Development/repos/WalterHikesBruce/testTools/images/upload): failed to open dir: No such file or directory in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 5
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  scandir(): (errno 2): No such file or directory in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 5
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 6
+[27-Mar-2019 14:39:16 America/New_York] PHP Warning:  array_values() expects parameter 1 to be array, boolean given in /d_drive/Development/repos/WalterHikesBruce/assets/php/helpers/directoryTools.php on line 14
+[27-Mar-2019 14:39:16 America/New_York] PHP Notice:  Undefined variable: conn in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 24
+[27-Mar-2019 14:39:16 America/New_York] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php:24
+Stack trace:
+#0 {main}
+  thrown in /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php on line 24

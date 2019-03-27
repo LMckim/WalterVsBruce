@@ -3,40 +3,68 @@
 // and re-building indexing of images as well as image sizes
 class imageStore
 {
-    function handleImage($img,$dir,$title,$conn)
-    {
-        //debugging
-        //shell_exec('php testTools/delete-images.php');
-        //debugging
-        $path;
-        $title = $conn->real_escape_string($title);
-        $date;
-        $ratio;
-        $orientation;
-        $latLong = array();
+    // constants
+    private $dbConnection;
+    private $temporaryFileLocation;
+    private $imageDirectory;
+    // image data
+    private $meta;
+    private $newImageLocation;
+    private $orientation;
 
-        if($this->checkDuplicate($img['name'],$dir) == FALSE)
+
+    function __construct($tmpFile,$dir,$conn)
+    {
+        $this->dbConnection = $conn;
+        $this->temporaryFileLocation = $tmpFile;
+        $this->imageDirectory = $dir;
+        print(shell_exec('php /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php'));
+    }
+    public function processImage($title)
+    {
+        $path = $this->newImageLocation;
+        $date = $this->getDate();
+        $orientation = $this->checkOrientation();
+        $latLong = $this->getLatLong();
+        if($this->createThumb() == FALSE)
+        {
+            return "could not process image : Thumbnail conversion failure...";
+        }else{
+            $sql = "INSERT INTO `images` (`title`,`path`,`latitude`,`longitude`,`date`)".
+            "VALUES ('$title','$path','$latLong[0]','$latLong[1]','$date')";
+
+            $result =  $this->dbConnection->query($sql);
+            if($result != 1)
+            {
+                return "could not process image : Error inserting image into database";
+            }
+            return TRUE;
+
+        }
+
+    }
+    public function handleImage($title)
+    {
+        $title = real_escape_string($title);
+        if($this->checkDuplicate() == FALSE)
         {
             return 'image already exists';
         } 
-        if($this->storeImage($img,$dir,$path) == FALSE)
+        if($this->moveImage() == FALSE)
         {
             return 'could not store image';
         }
-        // at this point stop using tmp file and use stored file
-        $meta = exif_read_data($path);
-        $date = $this->getDate($meta);
-        $ratio = $this->getRatio($meta);
-        $orientation = $this->checkOrientation($meta);
-        $this->fixOrientation($path,$orientation);
-        $latLong = $this->getLatLong($meta);
-        if($this->createThumb($img['name'],$dir,$path,$ratio,$orientation) == FALSE)
+        // at this point stop using tmp file and use stored file;
+        $date = $this->getDate();
+        $orientation = $this->checkOrientation();
+        $latLong = $this->getLatLong();
+        if($this->createThumb() == FALSE)
         {
             return "could not convert image";
         }
         // insert image info into database
         $sql = "INSERT INTO `images` (`title`,`path`,`latitude`,`longitude`,`date`)".
-                "VALUES ('$title','$path','$latLong[0]','$latLong[1]','$date')";
+                "VALUES ('$title','$this->newImageLocation','$latLong[0]','$latLong[1]','$date')";
         $result = $conn->query($sql);
         if($result != 1)
         {
@@ -45,67 +73,88 @@ class imageStore
         return TRUE;
         
     }
-    private function checkDuplicate($name,$dir)
+    public function checkDuplicate()
     {
-        $files = parseDirectory_forFiles($dir);
-        if(in_array($name,$files))
+        $files = parseDirectory_forFiles($this->imageDirectory);
+        if(in_array($this->temporaryFileLocation['name'],$files))
         {
             return FALSE;
         }
         return TRUE;
     }
-    private function storeImage($img,$dir,&$path)
+    public function moveImage()
     {
-        $path = $dir .'/'. $img['name'];
-        if(move_uploaded_file($img['tmp_name'],$path))
+        $name =$this->temporaryFileLocation['name'];
+        $tmpFile = $this->temporaryFileLocation['tmp_name'];
+
+        if(move_uploaded_file($tmpFile,$this->imageDirectory.'/'.$name))
         {
+            $this->newImageLocation = $this->imageDirectory.'/'.$name;
+            $this->meta = exif_read_data($this->newImageLocation);
             return TRUE;
         }
         return FALSE;
     }
-    private function getDate($meta)
+    private function getDate()
     {
-        $date = new DateTime($meta['DateTime']);
-        return $date->format('d.m.o | g:i A');
+        if(array_key_exists('DateTime',$this->meta))
+        {
+            $date = new DateTime($this->meta['DateTime']);
+            return $date->format('d.m.Y | g:i A');
+        }elseif(array_key_exists('FileDateTime',$this->meta))
+        {
+            $date = new DateTime($this->meta['FileDateTime']);
+            return $date->format('d.m.Y | g:i A');
+        }
     }
-    private function getRatio($meta)
+    private function checkOrientation()
     {
-        $height = $meta['COMPUTED']['Height'];
-        $width = $meta['COMPUTED']['Width'];
-        if($height > $width){return $width/$height;}
-        else{return $height/$width;}
+        if(array_key_exists('Orientation',$this->meta))
+        {
+            $this->orientation = $this->meta['Orientation'];
+            if($this->orientation == 6 || $this->orientation == 8 || $this->orientation == 3)
+            {
+                $this->fixOrientation($this->orientation);
+            }
+        }else{
+            return 0;
+        }
     }
-    private function checkOrientation($meta)
-    {
-        return $meta['Orientation'];
-    }
-    private function fixOrientation($img,$orientation)
+    private function fixOrientation($orientation)
     {
         // 6 & 8 = portrait
         // 1 & 3 = landscape
         if($orientation == 6)
         {
-            $src = imagecreatefromjpeg($img);
+            $src = imagecreatefromjpeg($this->newImageLocation);
             $rot = imagerotate($src,-90,0);
-            imagejpeg($rot,$img);
+            imagejpeg($rot,$this->newImageLocation);
             imagedestroy($src);
             imagedestroy($rot);
         }
         if($orientation == 8)
         {
-            $src = imagecreatefromjpeg($img);
+            $src = imagecreatefromjpeg($this->newImageLocation);
             $rot = imagerotate($src,90,0);
-            imagejpeg($rot,$img);
+            imagejpeg($rot,$this->newImageLocation);
+            imagedestroy($src);
+            imagedestroy($rot);
+        }
+        if($orientation == 3)
+        {
+            $src = imagecreatefromjpeg($this->newImageLocation);
+            $rot = imagerotate($src,180,0);
+            imagejpeg($rot,$this->newImageLocation);
             imagedestroy($src);
             imagedestroy($rot);
         }
     }
-    private function getLatLong($meta)
+    private function getLatLong()
     {
-        $latRef = $meta['GPSLatitudeRef'];
-        $longRef = $meta['GPSLongitudeRef'];
-        $latInfo = $meta['GPSLatitude'];
-        $longInfo = $meta['GPSLongitude'];
+        $latRef = $this->meta['GPSLatitudeRef'];
+        $longRef = $this->meta['GPSLongitudeRef'];
+        $latInfo = $this->meta['GPSLatitude'];
+        $longInfo = $this->meta['GPSLongitude'];
 
         $lat_degrees = count($latInfo) > 0 ? $this->gps2Num($latInfo[0]) : 0;
         $lat_minutes = count($latInfo) > 1 ? $this->gps2Num($latInfo[1]) : 0;
@@ -134,12 +183,12 @@ class imageStore
         return $parts[0];
         return floatval($parts[0]) / floatval($parts[1]);
     }
-    private function createThumb($name,$dir,$imagePath,$ratio,$orientation)
+    private function createThumb()
     {   
         // thumbnail dimensions
         $w = 300;
         $h = 300;
-        if($this->resizeImage($name,$dir,$imagePath,$w,$h,$ratio,$orientation))
+        if($this->resizeImage($w,$h))
         {
             return TRUE;
         }
@@ -147,36 +196,61 @@ class imageStore
 
     }
 
-    private function resizeImage($name,$dir,$path,$w,$h,$ratio,$orientation)
+    private function resizeImage($w,$h)
     {
-        $thumbDir = $dir .'/../thumbs';
+        $thumbDir = $this->imageDirectory .'/../thumbs';
+        $ratio = $this->getRatio();
 
-        $image = imagecreatefromjpeg($path);
+        $image = imagecreatefromjpeg($this->newImageLocation); // original image to copy from
         $imageW = imagesx($image);
         $imageH = imagesy($image);
-        
+
         // fix to work for width instead of height
-        $thumb = imagecreatetruecolor($w,$h);
-        $dst_w = $w / 2 * $ratio;
-        $wD = $w/2;
-        $iD = $dst_w/2;
-        $dst_Xpos = $wD-$iD;
+        
+        $thumb = imagecreatetruecolor($w,$h); // create a blank image with desired dimensions
 
-        if($orientation == 6 || $orientation == 8)
+        if($imageW > $imageH)
         {
-            imagecopyresampled($thumb, $image, $dst_Xpos, 0, 0, 0, $dst_w, 
-                            $h, $imageW, $imageH);
+            $diff = $imageW - $imageH;
+            $src_x = $diff/2;
+            
+            // new thumbnail, original image, new image x, new image y, old x, old y,
+            imagecopyresampled($thumb, $image,0, 0, $src_x, 0, $w, 
+                                $h, $imageH, $imageH);
+    
+            if(!imagejpeg($thumb,$thumbDir.'/'.$this->meta['FileName'],100))
+            {
+                return FALSE;
+            }
+            return TRUE;
         }else{
-            imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, 
-                                $h, $imageW, $imageH);
+            $diff = $imageH - $imageW;
+            $src_y = $diff/2;
+            
+            // new thumbnail, original image, new image x, new image y, old x, old y,
+            imagecopyresampled($thumb, $image,0, 0, 0, $src_y, $w, 
+                                $h, $imageW, $imageW);
+    
+            if(!imagejpeg($thumb,$thumbDir.'/'.$this->meta['FileName'],100))
+            {
+                return FALSE;
+            }
+            return TRUE;
         }
 
-        if(!imagejpeg($thumb,$thumbDir.'/'.$name,100))
+
+    }
+    private function getRatio()
+    {
+        if(array_key_exists('COMPUTED',$this->meta))
         {
-            return FALSE;
+            $height = $this->meta['COMPUTED']['Height'];
+            $width = $this->meta['COMPUTED']['Width'];
+            if($height > $width){return $width/$height;}
+            else{return $height/$width;}
+        }else{
+            return 0;
         }
-        return TRUE;
-
     }
 }
 class imageVerify
