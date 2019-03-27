@@ -208,6 +208,12 @@ body .underline {
   color: #FFFFFF;
 }
 
+@media screen and (max-width: 380px) {
+  #nav-bar .nav-banner h1 {
+    font-size: 2.5em;
+  }
+}
+
 @media screen and (max-width: 600px) {
   #nav-bar .nav-banner h1 {
     top: 50px;

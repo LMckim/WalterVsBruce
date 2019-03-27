@@ -23,7 +23,8 @@ unset($check);
 
 // handles storing, indexing and image size conversions
 // imageDir declared in config.php
-$storeImg = new imageStore($tmpFileMeta,$imageDir,$conn);
+$storeImg = new imageStore($imageDir,$conn);
+$storeImg->setOriginalImage($tmpFileMeta);
 // sanitize user input
 if($storeImg->checkDuplicate() != TRUE)
 {

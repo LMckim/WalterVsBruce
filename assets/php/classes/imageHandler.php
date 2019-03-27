@@ -13,15 +13,14 @@ class imageStore
     private $orientation;
 
 
-    function __construct($tmpFile,$dir,$conn)
+    function __construct($dir,$conn)
     {
         $this->dbConnection = $conn;
-        $this->temporaryFileLocation = $tmpFile;
         $this->imageDirectory = $dir;
-        print(shell_exec('php /d_drive/Development/repos/WalterHikesBruce/testTools/delete-images.php'));
     }
     public function processImage($title)
     {
+        $this->meta = exif_read_data($this->newImageLocation);
         $path = $this->newImageLocation;
         $date = $this->getDate();
         $orientation = $this->checkOrientation();
@@ -73,6 +72,10 @@ class imageStore
         return TRUE;
         
     }
+    public function setOriginalImage($path)
+    {
+        $this->temporaryFileLocation = $path;
+    }
     public function checkDuplicate()
     {
         $files = parseDirectory_forFiles($this->imageDirectory);
@@ -90,10 +93,14 @@ class imageStore
         if(move_uploaded_file($tmpFile,$this->imageDirectory.'/'.$name))
         {
             $this->newImageLocation = $this->imageDirectory.'/'.$name;
-            $this->meta = exif_read_data($this->newImageLocation);
             return TRUE;
         }
         return FALSE;
+    }
+    public function copyImage($path)
+    {   
+        copy($this->temporaryFileLocation,$path);
+        $this->newImageLocation = $path;
     }
     private function getDate()
     {
@@ -103,7 +110,8 @@ class imageStore
             return $date->format('d.m.Y | g:i A');
         }elseif(array_key_exists('FileDateTime',$this->meta))
         {
-            $date = new DateTime($this->meta['FileDateTime']);
+            $date = new DateTime();
+            $date->setTimestamp($this->meta['FileDateTime']);
             return $date->format('d.m.Y | g:i A');
         }
     }
@@ -151,28 +159,34 @@ class imageStore
     }
     private function getLatLong()
     {
-        $latRef = $this->meta['GPSLatitudeRef'];
-        $longRef = $this->meta['GPSLongitudeRef'];
-        $latInfo = $this->meta['GPSLatitude'];
-        $longInfo = $this->meta['GPSLongitude'];
+        if(array_key_exists('GPSLatitudeRef',$this->meta))
+        {
+            $latRef = $this->meta['GPSLatitudeRef'];
+            $longRef = $this->meta['GPSLongitudeRef'];
+            $latInfo = $this->meta['GPSLatitude'];
+            $longInfo = $this->meta['GPSLongitude'];
+    
+            $lat_degrees = count($latInfo) > 0 ? $this->gps2Num($latInfo[0]) : 0;
+            $lat_minutes = count($latInfo) > 1 ? $this->gps2Num($latInfo[1]) : 0;
+            $lat_seconds = count($latInfo) > 2 ? $this->gps2Num($latInfo[2]) : 0;
+            
+            $lon_degrees = count($longInfo) > 0 ? $this->gps2Num($longInfo[0]) : 0;
+            $lon_minutes = count($longInfo) > 1 ? $this->gps2Num($longInfo[1]) : 0;
+            $lon_seconds = count($longInfo) > 2 ? $this->gps2Num($longInfo[2]) : 0;
+            
+            $lat_direction = ($latRef== 'W' || $latRef == 'S') ? -1 : 1;
+            $lon_direction = ($longRef == 'W' || $longRef == 'S') ? -1 : 1;
+            
+            $lat = $lat_direction * ($lat_degrees + ($lat_minutes / 60) + ($lat_seconds / (60*60)));
+            $long = $lon_direction * ($lon_degrees + ($lon_minutes / 60) + ($lon_seconds / (60*60)));
+    
+            $latLong = array($lat,$long);
+    
+            return $latLong;
+        }else{
+            return array(0,0);
+        }
 
-        $lat_degrees = count($latInfo) > 0 ? $this->gps2Num($latInfo[0]) : 0;
-        $lat_minutes = count($latInfo) > 1 ? $this->gps2Num($latInfo[1]) : 0;
-        $lat_seconds = count($latInfo) > 2 ? $this->gps2Num($latInfo[2]) : 0;
-        
-        $lon_degrees = count($longInfo) > 0 ? $this->gps2Num($longInfo[0]) : 0;
-        $lon_minutes = count($longInfo) > 1 ? $this->gps2Num($longInfo[1]) : 0;
-        $lon_seconds = count($longInfo) > 2 ? $this->gps2Num($longInfo[2]) : 0;
-        
-        $lat_direction = ($latRef== 'W' || $latRef == 'S') ? -1 : 1;
-        $lon_direction = ($longRef == 'W' || $longRef == 'S') ? -1 : 1;
-        
-        $lat = $lat_direction * ($lat_degrees + ($lat_minutes / 60) + ($lat_seconds / (60*60)));
-        $long = $lon_direction * ($lon_degrees + ($lon_minutes / 60) + ($lon_seconds / (60*60)));
-
-        $latLong = array($lat,$long);
-
-        return $latLong;
     }
     private function gps2Num($coordPart)
     {

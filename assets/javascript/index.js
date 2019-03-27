@@ -36,21 +36,29 @@ window.onload = function(){
         }
     });
     // query DB for all comments related to each image
-    var imageBtn = document.getElementsByClassName('comment-btn');
-    var imageTitles = [];
-    for(var i=0; i< imageBtn.length; i++)
-    {
-        var par = commentBtn[i].parentElement.parentElement;
-        var titleDiv = par.childNodes[1];
-        var title = titleDiv.innerHTML;
-        imageTitles.push(title);
-    }
-    var requestMsg = 'getComments';
-    var requestJson = JSON.stringify(imageTitles);
-    var urlAppend = requestMsg + '=' + requestJson;
-    url += urlAppend;
+    document.addEventListener('click',function(event){
+        if(event.target.matches('.image-card-overlay')){
+            var container = event.target.parentNode.children;
+            container = container[1].children;
+            var title = container[1].innerHTML;
+            
+            var requestMsg = 'getComments';
+            var urlAppend = requestMsg + '=' + title;
+            var sendUrl = url + urlAppend;
 
-    request('GET',url);
+            request('GET',sendUrl);
+            
+        }else if(event.target.matches('.card-title')){
+            var title = event.target.innerHTML;
+            
+            var requestMsg = 'getComments';
+            var urlAppend = requestMsg + '=' + title;
+            var sendUrl = url + urlAppend;
+
+            request('GET',sendUrl);
+        }
+    });
+
 }
 function request(type,url){
     var http = new XMLHttpRequest();
