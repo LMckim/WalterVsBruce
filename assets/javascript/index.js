@@ -38,17 +38,16 @@ window.onload = function(){
     // handles most shit i guess
     document.addEventListener('click',function(event){
         // handle getting comments
-        var comments;
         if(event.target.matches('.image-card-overlay')){
             var container = event.target.parentNode.children;
             container = container[1].children;
             var title = container[1].innerHTML;
             
-            var requestMsg = 'getComments';
+            var requestMsg = 'getExpandedImage';
             var urlAppend = requestMsg + '=' + title;
             var sendUrl = url + urlAppend;
 
-            comments = request('GET',sendUrl);
+            request('GET',sendUrl,openExpandedImage,title);
 
         }else if(event.target.matches('.card-title')){
             var title = event.target.innerHTML;
@@ -57,17 +56,30 @@ window.onload = function(){
             var urlAppend = requestMsg + '=' + title;
             var sendUrl = url + urlAppend;
 
-            comments = request('GET',sendUrl);
+            request('GET',sendUrl);
         }
-        console.log(comments);
     });
 
 }
-function request(type,url){
+function request(type,url,callback,title){
     var http = new XMLHttpRequest();
     http.open(type,url);
     http.send();
-    http.onreadystatechange=(e)=>{
-        //console.log(http.responseText);
+    //  will call multiple times describing its state
+    http.onreadystatechange=(e)=>{;
+        if(http.readyState == 4)
+        {
+            callback(http.responseText,title);
+        }
     }
+}
+function openExpandedImage(response,title)
+{
+    response = JSON.parse(response);
+    let overlay = document.getElementById('image-expanded');
+    overlay.style.setProperty('display','block');
+    
+    let imageContainer = overlay.children[1].children[0];
+    let commentsContainer = overlay.children[1].children[1];
+
 }

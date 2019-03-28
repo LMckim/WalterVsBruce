@@ -15,9 +15,9 @@ $jsonReturn = array('status'=>'success','message'=>'all is well');
 // get requests handling
 if(isset($_GET))
 {
-    if(array_key_exists('getComments',$_GET))
+    if(array_key_exists('getExpandedImage',$_GET))
     {
-        include_once($root.'/assets/php/GETrequests/getComments.php');
+        include_once($root.'/assets/php/GETrequests/getExpandedImage.php');
     }
 }
 

@@ -41,10 +41,11 @@ while($row = $result->fetch_array(MYSQLI_NUM))
 $comments = file($root.'/testTools/imageComments.txt');
 shuffle($comments);
 
-foreach($id as $num)
+foreach($id as $key => $num)
 {   
-    $user = 'anon'.$num;
+    $user = 'anon'.array_rand($id);
     foreach($comments as $comment){
+        $comment = trim($comment);
         $sql = "INSERT INTO `comments`(`img_id`,`user`,`comment`) 
         VALUES('$num[0]','$user','$comment')";
         $conn->query($sql);
