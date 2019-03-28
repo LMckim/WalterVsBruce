@@ -20,8 +20,9 @@ class imageStore
     }
     public function processImage($title)
     {
+        $title = $this->dbConnection->real_escape_string(strtolower(trim($title)));
         $this->meta = exif_read_data($this->newImageLocation);
-        $path = $this->newImageLocation;
+        $path = trim($this->newImageLocation);
         $date = $this->getDate();
         $orientation = $this->checkOrientation();
         $latLong = $this->getLatLong();

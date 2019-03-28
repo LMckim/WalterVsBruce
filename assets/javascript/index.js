@@ -35,8 +35,10 @@ window.onload = function(){
             }
         }
     });
-    // query DB for all comments related to each image
+    // handles most shit i guess
     document.addEventListener('click',function(event){
+        // handle getting comments
+        var comments;
         if(event.target.matches('.image-card-overlay')){
             var container = event.target.parentNode.children;
             container = container[1].children;
@@ -46,8 +48,8 @@ window.onload = function(){
             var urlAppend = requestMsg + '=' + title;
             var sendUrl = url + urlAppend;
 
-            request('GET',sendUrl);
-            
+            comments = request('GET',sendUrl);
+
         }else if(event.target.matches('.card-title')){
             var title = event.target.innerHTML;
             
@@ -55,8 +57,9 @@ window.onload = function(){
             var urlAppend = requestMsg + '=' + title;
             var sendUrl = url + urlAppend;
 
-            request('GET',sendUrl);
+            comments = request('GET',sendUrl);
         }
+        console.log(comments);
     });
 
 }

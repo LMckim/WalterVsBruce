@@ -31,6 +31,30 @@ foreach($dir as $key => $image)
         break;
     }
 }
+$ids = array();
+$sql = "SELECT `id` FROM `images`";
+$result  = $conn->query($sql);
+while($row = $result->fetch_array(MYSQLI_NUM))
+{
+    $id[] = $row;
+}
+$comments = file($root.'/testTools/imageComments.txt');
+shuffle($comments);
+
+foreach($id as $num)
+{   
+    $user = 'anon'.$num;
+    foreach($comments as $comment){
+        $sql = "INSERT INTO `comments`(`img_id`,`user`,`comment`) 
+        VALUES('$num[0]','$user','$comment')";
+        $conn->query($sql);
+    }
+
+}
+
+
+
+
 $timeFin = time();
 $totalTime = $timeFin - $timeInit;
 print($count.' pictures succesfully added'."\n");
