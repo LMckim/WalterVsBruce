@@ -12,7 +12,7 @@ $path = $result['path'];
 $imageSrc = '../../images/upload/'.pathinfo($path,PATHINFO_BASENAME);
 $response['imageSrc'] = $imageSrc;
 // handle comment retrieval
-$sql = "SELECT `user`,`comment` FROM `comments` WHERE `img_id`='$id'";
+$sql = "SELECT `user`,`comment`,`time_commented` FROM `comments` WHERE `img_id`='$id'";
 $result = $conn->query($sql);
 $comments = array();
 // organize comments by user
@@ -21,9 +21,9 @@ while($row = $result->fetch_array(MYSQLI_NUM))
 {
     if(array_key_exists($row[0],$userComments))
     {
-        $userComments[$row[0]] = array_merge($userComments[$row[0]],array($row[1]));
+        $userComments[$row[0]] = array_merge($userComments[$row[0]],array($row[1],$row[2]));
     }else{
-        $userComments[$row[0]] = array($row[1]);
+        $userComments[$row[0]] = array($row[1],$row[2]);
     }
 }
 $response['comments'] = $userComments;

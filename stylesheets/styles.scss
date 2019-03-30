@@ -238,6 +238,7 @@ body{
         color: white;
 
         .image-container{
+            position: relative;
             margin: .5%;
             height: 98%;
             width: 175%;
@@ -253,7 +254,29 @@ body{
             width: 100%; height: 100%;
             text-align: center;
             overflow: scroll;
+            
+            padding-right: 0;
 
+            #exit-btn{
+                position: absolute;
+                right: 0;
+                padding-right: 2px;
+                margin-top: 0; padding-top: 0;
+
+                font-size: .75em;
+            }
+            #exit-btn:hover{
+                cursor: pointer;
+            }
+
+            .comment-msg{
+                h4{
+                    position: relative;
+                    top: 0;
+                }
+                border-top: 1px solid $site-faded-green;
+                border-bottom:  1px solid $site-faded-green;
+            }
         }
     }
 }
@@ -295,6 +318,11 @@ body{
             width: 100%;
             height: 100%;
             top: 0; bottom: 0;
+            flex-flow: column;
+            .image-container{
+                width: 100%;
+                height: 90%;
+            }
         }
     }
 }

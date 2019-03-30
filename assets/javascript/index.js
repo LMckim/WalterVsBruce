@@ -35,7 +35,7 @@ window.onload = function(){
             }
         }
     });
-    // handles most shit i guess
+    // handles most click events
     document.addEventListener('click',function(event){
         // handle getting comments
         if(event.target.matches('.image-card-overlay')){
@@ -86,8 +86,39 @@ function openExpandedImage(response,title)
     imageContainer.src = response.imageSrc;
     // handle comment container title and placing of comments
     let commentsContainer = overlay.children[1].children[1];
-    commentsContainer.children[0].children[0].innerHTML = title;
+    commentsContainer.children[1].children[0].innerHTML = title;
 
-    console.log(response);
-    let comments = response.comments;
+    // add listener to exit button
+    document.getElementById('exit-btn').addEventListener('click',function(){
+        if(overlay.style.getPropertyValue('display') == 'flex'){
+            overlay.style.setProperty('display','none');
+        }
+    });
+
+    
+    let commentsResponse = response.comments;
+    // above is an object so we need to get the actual key names to cycle
+    let keys = Object.keys(commentsResponse);
+
+    let commentsHTML = [];
+
+    for(let i=0; i<keys.length;i++){
+        for(let j=0; j<commentsResponse[keys[i]].length;j++){
+            
+            let comment = commentsResponse[keys[i]][j];
+            j++;
+            let date = commentsResponse[keys[i]][j];
+
+            let HTML = '<div class="comment-msg">'+
+                        '<h4 class="comment-user">'+ keys[i] + '</h4>' +
+                        '<p class="comment-text">'+ comment + '</p>' +
+                        '<h7 class="comment-date">'+ date +'</h7>' +
+                        '</div>';
+
+            commentsHTML.push(HTML);
+        }
+    }
+    for(let i=0; i<commentsHTML.length;i++){
+        commentsContainer.children[2].innerHTML = commentsContainer.children[2].innerHTML + commentsHTML[i];
+    }
 }
