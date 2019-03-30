@@ -9,19 +9,24 @@ $result = $result->fetch_array(MYSQLI_ASSOC);
 $id = $result['id'];
 $path = $result['path'];
 // handle image src
-$imageSrc = '/images/upload/'.pathinfo($path,PATHINFO_BASENAME);
+$imageSrc = '../../images/upload/'.pathinfo($path,PATHINFO_BASENAME);
 $response['imageSrc'] = $imageSrc;
 // handle comment retrieval
 $sql = "SELECT `user`,`comment` FROM `comments` WHERE `img_id`='$id'";
 $result = $conn->query($sql);
 $comments = array();
-// well put in something organize the comments by usr name later
+// organize comments by user
+$userComments = array();
 while($row = $result->fetch_array(MYSQLI_NUM))
 {
-    $comments[] = array($row[0]=>$row[1]);
-    
+    if(array_key_exists($row[0],$userComments))
+    {
+        $userComments[$row[0]] = array_merge($userComments[$row[0]],array($row[1]));
+    }else{
+        $userComments[$row[0]] = array($row[1]);
+    }
 }
-$response['comments'] = $comments;
+$response['comments'] = $userComments;
 
 print_r(json_encode($response));
 exit();

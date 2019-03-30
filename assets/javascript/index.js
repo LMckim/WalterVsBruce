@@ -50,18 +50,20 @@ window.onload = function(){
             request('GET',sendUrl,openExpandedImage,title);
 
         }else if(event.target.matches('.card-title')){
-            var title = event.target.innerHTML;
+            var container = event.target.parentNode.parentNode.children;
+            container = container[1].children;
+            var title = container[1].innerHTML;
             
-            var requestMsg = 'getComments';
+            var requestMsg = 'getExpandedImage';
             var urlAppend = requestMsg + '=' + title;
             var sendUrl = url + urlAppend;
 
-            request('GET',sendUrl);
+            request('GET',sendUrl,openExpandedImage,title);
         }
     });
 
 }
-function request(type,url,callback,title){
+function request(type,url,callback,passIn){
     var http = new XMLHttpRequest();
     http.open(type,url);
     http.send();
@@ -69,7 +71,7 @@ function request(type,url,callback,title){
     http.onreadystatechange=(e)=>{;
         if(http.readyState == 4)
         {
-            callback(http.responseText,title);
+            callback(http.responseText,passIn);
         }
     }
 }
@@ -77,9 +79,15 @@ function openExpandedImage(response,title)
 {
     response = JSON.parse(response);
     let overlay = document.getElementById('image-expanded');
-    overlay.style.setProperty('display','block');
+    overlay.style.setProperty('display','flex');
     
-    let imageContainer = overlay.children[1].children[0];
+    // add image to container
+    let imageContainer = overlay.children[1].children[0].children[0];
+    imageContainer.src = response.imageSrc;
+    // handle comment container title and placing of comments
     let commentsContainer = overlay.children[1].children[1];
+    commentsContainer.children[0].children[0].innerHTML = title;
 
+    console.log(response);
+    let comments = response.comments;
 }

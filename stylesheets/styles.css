@@ -216,10 +216,13 @@ body .underline {
   bottom: 0;
   right: 0;
   left: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 #image-expanded .image-expanded-overlay {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 100%;
   opacity: 0.5;
@@ -228,13 +231,41 @@ body .underline {
 
 #image-expanded .expanded-container {
   z-index: 6;
-  position: relative;
+  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 400px;
-  width: 400px;
-  background-color: #7E847F;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  height: 90%;
+  width: 90%;
+  top: 5%;
+  bottom: 5%;
+  background-color: #6B7E6C;
+  color: white;
+}
+
+#image-expanded .expanded-container .image-container {
+  margin: .5%;
+  height: 98%;
+  width: 175%;
+  background-color: #000000;
+}
+
+#image-expanded .expanded-container .image-container .image-container-image {
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+#image-expanded .expanded-container .comments-container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow: scroll;
 }
 
 @media screen and (max-width: 380px) {
@@ -258,6 +289,12 @@ body .underline {
   }
   #content {
     top: 280px;
+  }
+  #image-expanded .expanded-container {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
   }
 }
 /*# sourceMappingURL=styles.css.map */

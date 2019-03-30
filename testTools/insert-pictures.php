@@ -12,7 +12,7 @@ $names = file($root.'/testTools/imageNames.txt');
 shuffle($names);
 
 
-
+// insert images
 $storeImg = new imageStore($imageDir,$conn);
 $count = 0;
 foreach($dir as $key => $image)
@@ -31,6 +31,8 @@ foreach($dir as $key => $image)
         break;
     }
 }
+
+// setup and insert comments
 $ids = array();
 $sql = "SELECT `id` FROM `images`";
 $result  = $conn->query($sql);
@@ -40,11 +42,10 @@ while($row = $result->fetch_array(MYSQLI_NUM))
 }
 $comments = file($root.'/testTools/imageComments.txt');
 shuffle($comments);
-
 foreach($id as $key => $num)
 {   
-    $user = 'anon'.array_rand($id);
     foreach($comments as $comment){
+        $user = 'anon'.array_rand($id);
         $comment = trim($comment);
         $sql = "INSERT INTO `comments`(`img_id`,`user`,`comment`) 
         VALUES('$num[0]','$user','$comment')";
