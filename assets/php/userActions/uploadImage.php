@@ -41,17 +41,5 @@ if($result != TRUE)
 }
 unset($storeImg);
 
-/*
-$dir = $imageDir;
-$store = $storeImg->handleImage($tmp,$dir,$title,$conn);
-if($store !== TRUE)
-{
-    print("\n" .$store. "\n");
-    $jsonReturn = array('status'=>'error','message'=>$storeImg);
-    unset($storeImg);
-    exit();
-}
-unset($storeImg);
-*/
 
 ?> 

@@ -26,7 +26,7 @@ class imageStore
         $date = $this->getDate();
         $orientation = $this->checkOrientation();
         $latLong = $this->getLatLong();
-        if($this->createThumb() == FALSE)
+        if($this->resizeImage() == FALSE)
         {
             return "could not process image : Thumbnail conversion failure...";
         }else{
@@ -42,36 +42,6 @@ class imageStore
 
         }
 
-    }
-    public function handleImage($title)
-    {
-        $title = real_escape_string($title);
-        if($this->checkDuplicate() == FALSE)
-        {
-            return 'image already exists';
-        } 
-        if($this->moveImage() == FALSE)
-        {
-            return 'could not store image';
-        }
-        // at this point stop using tmp file and use stored file;
-        $date = $this->getDate();
-        $orientation = $this->checkOrientation();
-        $latLong = $this->getLatLong();
-        if($this->createThumb() == FALSE)
-        {
-            return "could not convert image";
-        }
-        // insert image info into database
-        $sql = "INSERT INTO `images` (`title`,`path`,`latitude`,`longitude`,`date`)".
-                "VALUES ('$title','$this->newImageLocation','$latLong[0]','$latLong[1]','$date')";
-        $result = $conn->query($sql);
-        if($result != 1)
-        {
-            return "error inserting image into database";
-        }
-        return TRUE;
-        
     }
     public function setOriginalImage($path)
     {
@@ -198,12 +168,12 @@ class imageStore
         return $parts[0];
         return floatval($parts[0]) / floatval($parts[1]);
     }
-    private function createThumb()
+    private function resizeImage()
     {   
         // thumbnail dimensions
         $w = 300;
         $h = 300;
-        if($this->resizeImage($w,$h))
+        if($this->resizeImageThumbnail($w,$h))
         {
             return TRUE;
         }
@@ -211,7 +181,7 @@ class imageStore
 
     }
 
-    private function resizeImage($w,$h)
+    private function resizeImageThumbnail($w,$h)
     {
         $thumbDir = $this->imageDirectory .'/../thumbs';
         $ratio = $this->getRatio();

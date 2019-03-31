@@ -211,7 +211,7 @@ body .underline {
 #image-expanded {
   z-index: 5;
   display: none;
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
@@ -263,6 +263,7 @@ body .underline {
 }
 
 #image-expanded .expanded-container .comments-container {
+  position: relative;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -271,15 +272,27 @@ body .underline {
 }
 
 #image-expanded .expanded-container .comments-container #exit-btn {
-  position: absolute;
-  right: 0;
+  position: fixed;
+  right: 5.7%;
   padding-right: 2px;
   margin-top: 0;
-  padding-top: 0;
+  padding-top: 5px;
   font-size: .75em;
 }
 
 #image-expanded .expanded-container .comments-container #exit-btn:hover {
+  cursor: pointer;
+}
+
+#image-expanded .expanded-container .comments-container #add-comment-btn {
+  position: fixed;
+  padding-left: 4px;
+  margin-top: 0;
+  padding-top: 5px;
+  font-size: .75em;
+}
+
+#image-expanded .expanded-container .comments-container #add-comment-btn:hover {
   cursor: pointer;
 }
 
@@ -291,6 +304,18 @@ body .underline {
 #image-expanded .expanded-container .comments-container .comment-msg h4 {
   position: relative;
   top: 0;
+}
+
+#image-expanded .expanded-container .comments-container .comment-msg .comment-user {
+  position: relative;
+  left: -32%;
+  margin: 0;
+}
+
+#image-expanded .expanded-container .comments-container .comment-msg .comment-date {
+  font-size: .6em;
+  position: relative;
+  right: -34%;
 }
 
 @media screen and (max-width: 380px) {
@@ -324,10 +349,23 @@ body .underline {
     -webkit-box-direction: normal;
         -ms-flex-flow: column;
             flex-flow: column;
+    overflow: visible;
   }
   #image-expanded .expanded-container .image-container {
     width: 100%;
-    height: 90%;
+    height: 80%;
+  }
+  #image-expanded .expanded-container .comments-container {
+    overflow: visible;
+  }
+  #image-expanded .expanded-container .comments-container #add-comment-btn {
+    position: absolute;
+  }
+  #image-expanded .expanded-container .comments-container #exit-btn {
+    position: absolute;
+  }
+  #image-expanded .expanded-container .comments-container .comment-msg {
+    background-color: #6B7E6C;
   }
 }
 /*# sourceMappingURL=styles.css.map */

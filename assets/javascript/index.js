@@ -77,6 +77,17 @@ function request(type,url,callback,passIn){
 }
 function openExpandedImage(response,title)
 {
+    var scrollPos = window.scrollY;;
+    window.scrollTo(0,0);
+
+    if(window.innerWidth > 600)
+    {
+        console.log('hh');
+        document.documentElement.style.overflow = 'hidden';
+        document.body.scroll = 'no';
+    }
+
+
     response = JSON.parse(response);
     let overlay = document.getElementById('image-expanded');
     overlay.style.setProperty('display','flex');
@@ -86,10 +97,15 @@ function openExpandedImage(response,title)
     imageContainer.src = response.imageSrc;
     // handle comment container title and placing of comments
     let commentsContainer = overlay.children[1].children[1];
-    commentsContainer.children[1].children[0].innerHTML = title;
+    commentsContainer.children[2].children[0].innerHTML = title;
 
     // add listener to exit button
     document.getElementById('exit-btn').addEventListener('click',function(){
+        window.scrollTo(0,scrollPos);
+
+        document.documentElement.style.overflow = 'scroll';
+        document.body.scroll = "yes";
+
         if(overlay.style.getPropertyValue('display') == 'flex'){
             overlay.style.setProperty('display','none');
         }
