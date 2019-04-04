@@ -257,7 +257,13 @@ body{
             overflow: scroll;
             
             padding-right: 0;
-
+            #comment-options{
+                background-color: $site-green;
+                z-index: 7;
+                height: 4%;
+                position: fixed;
+                width: 32%;
+            }
             #exit-btn{
                 position: fixed;
                 right: 5.7%;
@@ -280,29 +286,65 @@ body{
                 cursor: pointer;
             }
 
-            .comment-msg{
-                h4{
-                    position: relative;
-                    top: 0;
-                }
+
+        .comment-msg{
                 border-top: 1px solid $site-faded-green;
                 border-bottom:  1px solid $site-faded-green;
+                z-index: 6;
+                position: relative;
+                top: 0;
+            }
+            .comment-user{
+                position: relative;
+                left: -32%;
+                margin: 0;
+            }
+            .comment-date{
+                font-size: .6em;
+                position: relative;
+                right: -34%;
+            }   
+        }
+        #comment-form{
+            border-top: 1px solid $site-faded-green;
+            background-color: $site-green;
+            height: 15em;
+            h4{
+                position: relative;
+                top: 0;
+                padding-top: 0; margin-top: 0;
+                float: left;
+                font-size: .8em;
+            }
+            .comment-form-user{
+                position: relative;
+                top: 0;left: 0;
+                padding-top: 0; margin-top: 0;
 
-                .comment-user{
-                    position: relative;
-                    left: -32%;
-                    margin: 0;
-                }
-                .comment-date{
-                    font-size: .6em;
-                    position: relative;
-                    right: -34%;
-                }
-                
+                width: 30%;
+
+            }
+            .comment-form-text{
+                height: 75%;
+            }
+            #comment-form-submit{
+                background-color: $site-faded-green;
+
+                width: 50%;
+                text-align: center;
+                margin: auto;
+
+            }
+            #comment-form-submit:hover{
+                cursor: pointer;
+            }
+            #comment-form-submit:active{
+                background-color: $site-gray;
             }
         }
     }
 }
+
 @media screen and (max-width: 380px){
 
     #nav-bar{
@@ -350,6 +392,11 @@ body{
             }
             .comments-container{
                 overflow: visible;
+
+                #comment-options{
+                    position: relative;
+                    width: 100%;
+                }
 
                 #add-comment-btn{
                     position: absolute;

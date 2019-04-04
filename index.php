@@ -18,6 +18,9 @@ if(isset($_GET))
     if(array_key_exists('getExpandedImage',$_GET))
     {
         include_once($root.'/assets/php/GETrequests/getExpandedImage.php');
+    }elseif(array_key_exists('addComment',$_GET))
+    {
+        include_once($root.'/assets/php/GETrequests/addComment.php');
     }
 }
 

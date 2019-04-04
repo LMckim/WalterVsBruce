@@ -1,0 +1,18 @@
+fix scrolling back to top on expanded image open
+add constraints on comment username
+add constraints on comment input
+add constraints on image title
+
+add check that comment username is filled in
+add check that image title is filled in
+add check that comment is filled out
+
+
+parse all incoming info before it touches the db
+
+
+allow walt to stay signed in
+
+
+resize incoming images by 2X and 3X
+show image preview before uploading
