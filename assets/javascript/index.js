@@ -161,25 +161,47 @@ function openExpandedImage(response,title)
     let commentsHTML = [];
 
     for(let i=0; i<keys.length;i++){
-        for(let j=0; j<commentsResponse[keys[i]].length;j++){
-            
-            let comment = commentsResponse[keys[i]][j];
-            j++;
-            let date = commentsResponse[keys[i]][j];
+       let user = commentsResponse[i][0];
+       let comment = commentsResponse[i][1];
+       let date = commentsResponse[i][2];
 
-            let HTML = '<div class="comment-msg">'+
-                        '<h4 class="comment-user">'+ keys[i] + '</h4>' +
+        let HTML = '<div class="comment-msg">'+
+                        '<h4 class="comment-user">'+ user + '</h4>' +
                         '<p class="comment-text">'+ comment + '</p>' +
                         '<h7 class="comment-date">'+ date +'</h7>' +
                         '</div>';
 
-            commentsHTML.push(HTML);
-        }
+        commentsHTML.push(HTML);
     }
     for(let i=0; i<commentsHTML.length;i++){
         commentsContainer.children[2].innerHTML = commentsContainer.children[2].innerHTML + commentsHTML[i];
     }
 }
 function reloadComments(comments){
-    
+
+    let commentsResponse = JSON.parse(comments);
+    commentsResponse = commentsResponse.comments;
+    let keys = Object.keys(commentsResponse);
+
+
+    let commentsHTML = [];
+
+    for(let i=0; i<keys.length;i++){
+       let user = commentsResponse[i][0];
+       let comment = commentsResponse[i][1];
+       let date = commentsResponse[i][2];
+
+        let HTML = '<div class="comment-msg">'+
+                        '<h4 class="comment-user">'+ user + '</h4>' +
+                        '<p class="comment-text">'+ comment + '</p>' +
+                        '<h7 class="comment-date">'+ date +'</h7>' +
+                        '</div>';
+
+        commentsHTML.push(HTML);
+    }
+    let commentsContainer = document.getElementById('image-expanded').children[1].children[1];
+    commentsContainer.children[2].innerHTML = '';
+    for(let i=0; i<commentsHTML.length;i++){
+        commentsContainer.children[2].innerHTML = commentsContainer.children[2].innerHTML + commentsHTML[i];
+    }
 }

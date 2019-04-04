@@ -19,12 +19,7 @@ $comments = array();
 $userComments = array();
 while($row = $result->fetch_array(MYSQLI_NUM))
 {
-    if(array_key_exists($row[0],$userComments))
-    {
-        $userComments[$row[0]] = array_merge($userComments[$row[0]],array($row[1],$row[2]));
-    }else{
-        $userComments[$row[0]] = array($row[1],$row[2]);
-    }
+    $userComments[] = array($row[0],$row[1],$row[2]);
 }
 $response['comments'] = $userComments;
 

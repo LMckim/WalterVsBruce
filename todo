@@ -16,3 +16,5 @@ allow walt to stay signed in
 
 resize incoming images by 2X and 3X
 show image preview before uploading
+
+ensure comments cant be duplicates
