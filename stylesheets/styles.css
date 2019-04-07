@@ -268,13 +268,14 @@ body .underline {
   height: 100%;
   text-align: center;
   overflow: scroll;
+  overflow-x: hidden;
   padding-right: 0;
 }
 
 #image-expanded .expanded-container .comments-container #comment-options {
   background-color: #6B7E6C;
   z-index: 7;
-  height: 4%;
+  height: 2%;
   position: fixed;
   width: 32%;
 }

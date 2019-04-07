@@ -255,12 +255,13 @@ body{
             width: 100%; height: 100%;
             text-align: center;
             overflow: scroll;
+            overflow-x: hidden; 
             
-            padding-right: 0;
+            padding-right: 0; 
             #comment-options{
                 background-color: $site-green;
                 z-index: 7;
-                height: 4%;
+                height: 2%;
                 position: fixed;
                 width: 32%;
             }
