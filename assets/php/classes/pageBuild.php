@@ -38,7 +38,7 @@ class pageBuild{
     {   
         $content = '';
 
-        $sql = "SELECT `title`,`path`,`date` FROM `images` LIMIT 50";
+        $sql = "SELECT `id`,`title`,`path`,`date` FROM `images` LIMIT 50";
         $imageDB = $conn->query($sql);
         if(mysqli_num_rows($imageDB) <= 0)
         {
@@ -66,6 +66,8 @@ class pageBuild{
                     $imageTitle = 'Bruce_Trail';
                 }
             }
+            $imageId = $row['id'];
+            $this->insertString_replaceKey($newCard,$imageId,'{{image_id}}');
             $this->insertString_replaceKey($newCard,$imageTitle,'{{title}}');
             $class = 'card-image';
             $imagePath = '../../images/thumbs/' . $imageName;

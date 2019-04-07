@@ -173,11 +173,15 @@ class imageStore
         // thumbnail dimensions
         $w = 300;
         $h = 300;
-        if($this->resizeImageThumbnail($w,$h))
+        if($this->resizeImageThumbnail($w,$h) == FALSE)
         {
-            return TRUE;
+            return FALSE;
         }
-        return FALSE;
+        if($this->resizeImagePreview() == FALSE)
+        {
+            return FALSE;
+        }
+        return TRUE;
 
     }
 
@@ -223,6 +227,28 @@ class imageStore
             return TRUE;
         }
 
+
+    }
+    private function resizeImagePreview()
+    {
+        $processedDir = $this->imageDirectory .'/../processed';
+
+        $image = imagecreatefromjpeg($this->newImageLocation); // original image to copy from
+        $imageW = imagesx($image);
+        $imageH = imagesy($image);
+
+        $processedW = $imageW * 0.1;
+        $processedH = $imageH * 0.1;
+    
+        $processedImg = imagecreatetruecolor($processedW,$processedH); // create a blank image with desired dimensions
+
+        imagecopyresized($processedImg,$image,0,0,0,0,$processedW,$processedH,$imageW,$imageH);
+
+        if(!imagejpeg($processedImg,$processedDir.'/'.$this->meta['FileName'],100))
+        {
+            return FALSE;
+        }
+        return TRUE;
 
     }
     private function getRatio()

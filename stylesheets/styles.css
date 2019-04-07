@@ -380,6 +380,7 @@ body .underline {
   }
   #nav-bar .nav-banner .nav-image {
     height: 200px;
+    background-image: url("../site_images/banner-img-sm.jpg");
   }
   #nav-bar .nav-banner .nav-image-overlay {
     height: 200px;
@@ -420,6 +421,12 @@ body .underline {
   }
   #image-expanded .expanded-container .comments-container .comment-msg {
     background-color: #6B7E6C;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  #nav-bar .nav-banner .nav-image {
+    background-image: url("../site_images/banner-img-med.jpg");
   }
 }
 /*# sourceMappingURL=styles.css.map */

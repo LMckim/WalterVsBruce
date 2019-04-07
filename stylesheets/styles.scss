@@ -367,6 +367,7 @@ body{
             }
             .nav-image{
                 height:$image-half-height;
+                background-image: url('../site_images/banner-img-sm.jpg');
             }
             .nav-image-overlay{
                 height:$image-half-height;
@@ -409,6 +410,16 @@ body{
                 .comment-msg{
                     background-color: $site-green;
                 }
+            }
+        }
+    }
+}
+@media screen and (max-width: 1280px){
+    #nav-bar{
+        .nav-banner{ 
+
+            .nav-image{
+                background-image: url('../site_images/banner-img-med.jpg');
             }
         }
     }

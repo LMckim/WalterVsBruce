@@ -1,20 +1,24 @@
-fix scrolling back to top on expanded image open
-add constraints on comment username
-add constraints on comment input
-add constraints on image title
+-- DONE:fix scrolling back to top on expanded image open
+-- DONE:add constraints on comment username
+-- DONE:add constraints on comment input
+-- DONE:add constraints on image title
+        -- NOTE: Changed image return to work off of image id
 
-add check that comment username is filled in
-add check that image title is filled in
-add check that comment is filled out
-
-
-parse all incoming info before it touches the db
+-- DONE:add check that comment username is filled in
+-- DONE:add check that image title is filled in
+-- DONE:add check that comment is filled out
 
 
 allow walt to stay signed in
 
+tidy up comments section scrollbars
+stop user from being able to scroll below comments container on mobile
 
-resize incoming images by 2X and 3X
+-- DONE:resize incoming images by 2X and 3X
 show image preview before uploading
 
-ensure comments cant be duplicates
+-- DONE:ensure comments cant be duplicates
+        -- NOTE: Comments can be duplicates but only if from different users
+
+parse all incoming info before it touches the db
+gotta handle having more than fifty images in pagebuild, should probably just use lazy loading

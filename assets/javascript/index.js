@@ -42,6 +42,34 @@ window.onload = function(){
             var container = event.target.parentNode.children;
             container = container[1].children;
             var title = container[1].innerHTML;
+            var img_id = container[1].getAttribute('img_id');
+            
+            var requestMsg = 'getExpandedImage';
+            var urlAppend = requestMsg + '=' + img_id;
+            var sendUrl = url + urlAppend;
+
+            request('GET',sendUrl,openExpandedImage,title);
+
+        }else if(event.target.matches('.card-title')){
+            var container = event.target.parentNode.parentNode.children;
+            container = container[1].children;
+            var title = container[1].innerHTML;
+            var img_id = container[1].getAttribute('img_id');
+            console.log(img_id);
+            
+            var requestMsg = 'getExpandedImage';
+            var urlAppend = requestMsg + '=' + img_id;
+            var sendUrl = url + urlAppend;
+
+            request('GET',sendUrl,openExpandedImage,title);
+        }
+    });
+    document.addEventListener('onfocus',function(event){
+        // handle getting comments
+        if(event.target.matches('.image-card-overlay')){
+            var container = event.target.parentNode.children;
+            container = container[1].children;
+            var title = container[1].innerHTML;
             
             var requestMsg = 'getExpandedImage';
             var urlAppend = requestMsg + '=' + title;
@@ -120,11 +148,17 @@ function openExpandedImage(response,title)
             form.children[3].addEventListener('click',function(){
                 let username = form.children[1].value;
                 let commentText = form.children[2].value;
+                if(username.length < 3){
+                    alert("Username must be at least 3 characters, Try again");
+                }
+                else if(commentText == '' || commentText.length < 3){
+                    alert("this comment has less than 3 letters? Is it even worth saying at that point, try harder");
+                }else{
+                    var sendUrl = url +"addComment=''" +'&User='+username+'&Comment='+commentText+
+                    '&title='+title;
 
-                var sendUrl = url +"addComment=''" +'&User='+username+'&Comment='+commentText+
-                                    '&title='+title;
-    
-                request('GET',sendUrl,reloadComments);
+                    request('GET',sendUrl,reloadComments);   
+                }
             });
 
         }
@@ -153,7 +187,7 @@ function openExpandedImage(response,title)
             commentsContentContainer.children[2].innerHTML = '';
     });
 
-    
+    // add in comments for picture
     let commentsResponse = response.comments;
     // above is an object so we need to get the actual key names to cycle
     let keys = Object.keys(commentsResponse);

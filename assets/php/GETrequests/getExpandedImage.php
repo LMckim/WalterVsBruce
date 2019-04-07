@@ -1,15 +1,15 @@
 <?php
 $repsonse = array();
 
-$title = strtolower($_GET['getExpandedImage']);
-$sql = "SELECT `id`,`path` FROM `images` WHERE `title`='$title'";
+$img_id = strtolower($_GET['getExpandedImage']);
+$sql = "SELECT `id`,`path` FROM `images` WHERE `id`='$img_id'";
 $result = $conn->query($sql);
 $result = $result->fetch_array(MYSQLI_ASSOC);
 // set variables from result
 $id = $result['id'];
 $path = $result['path'];
 // handle image src
-$imageSrc = '../../images/upload/'.pathinfo($path,PATHINFO_BASENAME);
+$imageSrc = '../../images/processed/'.pathinfo($path,PATHINFO_BASENAME);
 $response['imageSrc'] = $imageSrc;
 // handle comment retrieval
 $sql = "SELECT `user`,`comment`,`time_commented` FROM `comments` WHERE `img_id`='$id'";

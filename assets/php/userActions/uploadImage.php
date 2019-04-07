@@ -7,7 +7,20 @@ if(isset($_FILES))
 }
 if(isset($_POST))
 { 
-    $title = $_POST['image-title'];
+    $title = $conn->real_escape_string($_POST['image-title']);
+
+    // check title length
+    if($title == '' || strlen($title) <= 1)
+    {
+        $sql = "SELECT COUNT(*) FROM `images`";
+        $result = $conn->query($sql);
+        if(mysqli_num_rows($result) <= 0)
+        {
+            // something to fail to if the image table doesnt exist
+        }
+        $result = mysqli_fetch_array($result);
+        $title = "Bruce_Trail_".$result[0];
+    }
 }
 // check image is legit
 $verify = new imageVerify();
